@@ -32,38 +32,31 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class GetMovementConnector @Inject()
 (
-  httpClient: HttpClient,
-  override val appConfig: AppConfig,
-  emcsUtils: EmcsUtils,
-  metrics: Metrics
-)(implicit val ec: ExecutionContext) extends EISConsumptionHeader with ResponseHandler with Logging {
+  eishttpClient: EisHttpClient,
+  appConfig: AppConfig
+)(implicit val ec: ExecutionContext) extends ResponseHandler with Logging {
 
   def get(
     ern: String,
     arc: String
   )(implicit hc: HeaderCarrier): Future[Either[Result, EISConsumptionResponse]] = {
 
-    val timer = metrics.defaultRegistry.timer("emcs.getmovements.timer").time()
-    val correlationId = emcsUtils.generateCorrelationId
-    val createDateTime = emcsUtils.getCurrentDateTimeString
-
-    httpClient.GET[HttpResponse](
+    eishttpClient.get(
       appConfig.traderMovementUrl,
       Seq("exciseregistrationnumber" -> ern, "arc" -> arc),
-      build(correlationId, createDateTime)
-    ).map { response: HttpResponse =>
+      "emcs.getmovements.timer"
+    ).map { response: EisHttpResponse =>
 
       extractIfSuccessful[EISConsumptionResponse](response) match {
         case Right(eisResponse) => Right(eisResponse)
         case Left(_) =>
-          logger.warn(EISErrorMessage(createDateTime,ern, response.body, correlationId, MessageTypes.IE_MOVEMENT_FOR_TRADER.value))
+          logger.warn(EISErrorMessage(response.createdDateTime,ern, response.body, response.correlationId, MessageTypes.IE_MOVEMENT_FOR_TRADER.value))
           Left(InternalServerError(response.body))
       }
     }
-      .andThen {case _ => timer.stop() }
       .recover {
       case ex: Throwable =>
-        logger.warn(EISErrorMessage(createDateTime,ern, ex.getMessage, correlationId, MessageTypes.IE_MOVEMENT_FOR_TRADER.value))
+        logger.warn(EISErrorMessage(response.createdDateTime,ern, ex.getMessage, response.correlationId, MessageTypes.IE_MOVEMENT_FOR_TRADER.value))
         Left(InternalServerError(ex.getMessage))
     }
   }

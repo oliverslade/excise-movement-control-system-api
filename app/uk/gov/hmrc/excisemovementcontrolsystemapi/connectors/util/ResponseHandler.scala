@@ -18,6 +18,7 @@ package uk.gov.hmrc.excisemovementcontrolsystemapi.connectors.util
 
 import play.api.Logging
 import play.api.libs.json.{Json, Reads}
+import uk.gov.hmrc.excisemovementcontrolsystemapi.connectors.EisHttpResponse
 import uk.gov.hmrc.http.HttpReads.is2xx
 import uk.gov.hmrc.http.HttpResponse
 
@@ -29,6 +30,10 @@ trait ResponseHandler extends Logging {
   def extractIfSuccessful[T](response: HttpResponse)(implicit reads: Reads[T], tt: TypeTag[T]): Either[HttpResponse, T] =
     if (is2xx(response.status)) Right(jsonAs[T](response.body))
     else Left(response)
+
+  def extractIfSuccessful[T](eisHttpResponse: EisHttpResponse)(implicit reads: Reads[T], tt: TypeTag[T]): Either[EisHttpResponse, T] =
+    if (is2xx(eisHttpResponse.status)) Right(jsonAs[T](eisHttpResponse.body))
+    else Left(eisHttpResponse)
 
   def jsonAs[T](body: String)(implicit reads: Reads[T],  tt: TypeTag[T]): T = {
     Try(Json.parse(body).as[T]) match {

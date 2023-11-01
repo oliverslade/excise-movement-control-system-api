@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.excisemovementcontrolsystemapi.connector
 
+import akka.Done
 import com.codahale.metrics.Timer
 import com.kenshoo.play.metrics.Metrics
-import dispatch.Future
 import org.mockito.ArgumentMatchersSugar.{any, eqTo}
 import org.mockito.Mockito.RETURNS_DEEP_STUBS
 import org.mockito.MockitoSugar.{reset, verify, when}
@@ -29,13 +29,15 @@ import play.api.libs.json.Json
 import play.api.mvc.Results.InternalServerError
 import play.api.test.Helpers.{await, defaultAwaitTimeout}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.config.AppConfig
-import uk.gov.hmrc.excisemovementcontrolsystemapi.connectors.GetMovementConnector
+import uk.gov.hmrc.excisemovementcontrolsystemapi.connectors.{EisHttpClient, GetMovementConnector}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.EmcsUtils
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.eis.EISConsumptionResponse
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient, HttpResponse}
 
 import java.time.LocalDateTime
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, Future}
+import play.api.libs.concurrent.Futures
+
 import scala.reflect.runtime.universe.typeOf
 
 class GetMovementConnectorSpec extends PlaySpec
@@ -49,7 +51,6 @@ class GetMovementConnectorSpec extends PlaySpec
   private val appConfig = mock[AppConfig]
   private val metrics = mock[Metrics](RETURNS_DEEP_STUBS)
   private val emcsUtil = mock[EmcsUtils]
-  private val sut = new GetMovementConnector(httpClient, appConfig, emcsUtil, metrics)
   private val dateTime = LocalDateTime.of(2023, 2, 3, 5, 6, 7)
   private val response  = EISConsumptionResponse(
     dateTime,
@@ -58,6 +59,12 @@ class GetMovementConnectorSpec extends PlaySpec
   )
 
   private val timerContext = mock[Timer.Context]
+  private val futures = mock[Futures]
+
+  private def createConnector = {
+    val eisHttpClient = new EisHttpClient(httpClient, appConfig, emcsUtil, metrics, futures)
+    new GetMovementConnector(eisHttpClient, appConfig, emcsUtil, metrics)
+  }
 
   override def beforeEach(): Unit = {
     super.beforeEach()
@@ -70,18 +77,19 @@ class GetMovementConnectorSpec extends PlaySpec
     when(appConfig.systemApplication).thenReturn("uk.gov.hmrc.cdio.cbit.emcs.core.api")
     when(emcsUtil.generateCorrelationId).thenReturn("1234")
     when(emcsUtil.getCurrentDateTimeString).thenReturn(dateTime.toString)
-    when(metrics.defaultRegistry.timer(any).time()) thenReturn timerContext
+    when(metrics.defaultRegistry.timer(any).time()).thenReturn(timerContext)
+    when(futures.delay(any)).thenReturn(Future.successful(Done))
   }
 
   "get" should {
     "return a response" in {
-      val result = await(sut.get("ern", "arc"))
+      val result = await(createConnector.get("ern", "arc"))
 
       result mustBe Right(response)
     }
 
     "pass the right parameters to the HttpClient" in {
-      await(sut.get("ern", "arc"))
+      await(createConnector.get("ern", "arc"))
 
       verify(httpClient).GET(
         eqTo("/trader-movement-url"),
@@ -95,7 +103,7 @@ class GetMovementConnectorSpec extends PlaySpec
         when(httpClient.GET[Any](any, any, any)(any, any, any))
           .thenReturn(Future.successful(HttpResponse(200, "error message")))
 
-        val result = await(sut.get("ern", "arc"))
+        val result = await(createConnector.get("ern", "arc"))
 
         result.left.value mustBe InternalServerError(s"Response body could not be read as type ${typeOf[EISConsumptionResponse]}")
       }
@@ -104,18 +112,10 @@ class GetMovementConnectorSpec extends PlaySpec
         when(httpClient.GET[Any](any, any, any)(any, any, any))
           .thenReturn(Future.successful(HttpResponse(404, "error message")))
 
-        val result = await(sut.get("ern", "arc"))
+        val result = await(createConnector.get("ern", "arc"))
 
         result.left.value mustBe InternalServerError("error message")
       }
-    }
-
-    "should start a timer" in {
-      await(sut.get("123", "arc"))
-
-      verify(metrics.defaultRegistry).timer(eqTo("emcs.getmovements.timer"))
-      verify(metrics.defaultRegistry.timer(eqTo("emcs.getmovements.timer"))).time()
-      verify(timerContext).stop()
     }
   }
 

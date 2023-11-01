@@ -22,7 +22,7 @@ import play.api.libs.json.Json
 import play.api.mvc.Result
 import play.api.mvc.Results.InternalServerError
 import uk.gov.hmrc.excisemovementcontrolsystemapi.config.AppConfig
-import uk.gov.hmrc.excisemovementcontrolsystemapi.connectors.util.EISHttpReader
+import uk.gov.hmrc.excisemovementcontrolsystemapi.connectors.util.{EISHttpReader, HttpReader}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.EmcsUtils
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auth.{DataRequest, DataRequestIE818}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.eis._
@@ -58,7 +58,7 @@ class EISSubmissionConnector @Inject()
       appConfig.emcsReceiverMessageUrl,
       eisRequest,
       build(correlationId, createdDateTime)
-    )(EISRequest.format, EISHttpReader(correlationId, consignorId, createdDateTime), hc, ec)
+    )(EISRequest.format, HttpReader.read(correlationId, consignorId, createdDateTime), hc, ec)
       .andThen { case _ => timer.stop() }
       .recover {
         case ex: Throwable =>
@@ -92,7 +92,7 @@ class EISSubmissionConnector @Inject()
       appConfig.emcsReceiverMessageUrl,
       eisRequest,
       build(correlationId, createdDateTime)
-    )(EISRequest.format, EISHttpReader(correlationId, consigneeId, createdDateTime), hc, ec)
+    )(EISRequest.format, HttpReader.read(correlationId, consigneeId, createdDateTime), hc, ec)
       .andThen { case _ => timer.stop() }
       .recover {
         case ex: Throwable =>

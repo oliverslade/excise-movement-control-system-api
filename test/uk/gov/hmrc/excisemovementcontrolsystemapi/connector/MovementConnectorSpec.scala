@@ -104,14 +104,12 @@ class MovementConnectorSpec extends PlaySpec with BeforeAndAfterEach with Either
 
       verify(appConfig).emcsReceiverMessageUrl
 
-      val captor = ArgCaptor[EISHttpReader]
       verify(mockHttpClient).POST(
         eqTo("/eis/path"),
         eqTo(eisRequest),
         eqTo(expectedHeader)
-      )(any, captor.capture, any, any)
+      )(any, any, any, any)
 
-      captor.value.isInstanceOf[EISHttpReader] mustBe true
     }
 
     "return Bad request error" in {
