@@ -63,6 +63,8 @@ class EISHttpReader(
     if (is2xx(response.status)) Right(jsonAs[T](response.body))
     else Left(response)
 
+
+
   private def jsonAs[T](body: String)(implicit reads: Reads[T],  tt: TypeTag[T]): T = {
     Try(Json.parse(body).as[T]) match {
       case Success(obj) => obj

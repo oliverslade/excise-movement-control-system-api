@@ -16,64 +16,64 @@
 
 package uk.gov.hmrc.excisemovementcontrolsystemapi.connectors
 
-import com.kenshoo.play.metrics.Metrics
 import play.api.Logging
-import play.api.libs.json.Json
+import play.api.http.Status.{BAD_REQUEST, NOT_FOUND, SERVICE_UNAVAILABLE}
 import play.api.mvc.Result
-import play.api.mvc.Results.InternalServerError
+import play.api.mvc.Results.{BadRequest, InternalServerError, NotFound, ServiceUnavailable}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.config.AppConfig
-import uk.gov.hmrc.excisemovementcontrolsystemapi.connectors.util.EISHttpReader
+import uk.gov.hmrc.excisemovementcontrolsystemapi.connectors.util.{EisHttpClient, EisHttpResponse, ResponseHandler}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.EmcsUtils
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auth.ValidatedXmlRequest
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.eis._
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages._
-import uk.gov.hmrc.http.{HeaderCarrier, HttpClient}
+import uk.gov.hmrc.http.HeaderCarrier
 
 import java.nio.charset.StandardCharsets
-import java.time.LocalDateTime
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class EISSubmissionConnector @Inject()
-(
-  httpClient: HttpClient,
+class EISSubmissionConnector @Inject()(
+  eisHttpClient: EisHttpClient,
   emcsUtils: EmcsUtils,
   appConfig: AppConfig,
-  metrics: Metrics
-)(implicit ec: ExecutionContext) extends EISSubmissionHeader with Logging {
+)(implicit ec: ExecutionContext) extends ResponseHandler with Logging {
 
   def submitMessage(request: ValidatedXmlRequest[_])(implicit hc: HeaderCarrier): Future[Either[Result, EISSubmissionResponse]] = {
 
-    val timer = metrics.defaultRegistry.timer("emcs.submission.connector.timer").time()
-
     //todo: add retry
-    val correlationId = emcsUtils.generateCorrelationId
-    val createdDateTime = emcsUtils.getCurrentDateTimeString
     val encodedMessage = emcsUtils.createEncoder.encodeToString(request.body.toString.getBytes(StandardCharsets.UTF_8))
     val messageType = request.parsedRequest.ieMessage.messageType
-    val eisRequest = EISRequest(correlationId, createdDateTime, messageType, EmcsSource, "user1", encodedMessage)
-
     val ern = getSingleErnFromMessage(request.parsedRequest.ieMessage, request.validErns)
 
-    httpClient.POST[EISRequest, Either[Result, EISSubmissionResponse]](
+    eisHttpClient.post(
       appConfig.emcsReceiverMessageUrl,
-      eisRequest,
-      build(correlationId, createdDateTime)
-    )(EISRequest.format, EISHttpReader(correlationId, ern, createdDateTime), hc, ec)
-      .andThen { case _ => timer.stop() }
-      .recover {
-        case ex: Throwable =>
-
-          logger.warn(EISErrorMessage(createdDateTime, ern, ex.getMessage, correlationId, messageType), ex)
-
-          val error = EISErrorResponse(
-            LocalDateTime.parse(createdDateTime),
-            "Exception",
-            ex.getMessage,
-            correlationId
-          )
-          Left(InternalServerError(Json.toJson(error)))
+      ern,
+      messageType,
+      encodedMessage,
+      "emcs.submission.connector.timer"
+    ).map{ response =>
+      val result = extractIfSuccessful[EISSubmissionResponse](response)
+      result match {
+        case Right(eisResponse) => Right(eisResponse)
+        case Left(eisHttpResponse) => Left(handleErrorResponse(eisHttpResponse, messageType))
       }
+    }
+  }
+
+  private def handleErrorResponse(
+    response: EisHttpResponse,
+    messageType: String
+  ): Result = {
+
+    logger.warn(EISErrorMessage(response.createdDateTime, response.ern, response.body, response.correlationId, messageType))
+
+    val messageAsJson = response.json
+    response.status match {
+      case BAD_REQUEST => BadRequest(messageAsJson)
+      case NOT_FOUND => NotFound(messageAsJson)
+      case SERVICE_UNAVAILABLE => ServiceUnavailable(messageAsJson)
+      case _ => InternalServerError(messageAsJson)
+    }
   }
 
   /*

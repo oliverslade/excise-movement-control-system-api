@@ -30,6 +30,10 @@ trait ResponseHandler extends Logging {
     if (is2xx(response.status)) Right(jsonAs[T](response.body))
     else Left(response)
 
+  def extractIfSuccessful[T](response: EisHttpResponse)(implicit reads: Reads[T], tt: TypeTag[T]): Either[EisHttpResponse, T] =
+    if (is2xx(response.status)) Right(jsonAs[T](response.body))
+    else Left(response)
+
   def jsonAs[T](body: String)(implicit reads: Reads[T],  tt: TypeTag[T]): T = {
     Try(Json.parse(body).as[T]) match {
       case Success(obj) => obj

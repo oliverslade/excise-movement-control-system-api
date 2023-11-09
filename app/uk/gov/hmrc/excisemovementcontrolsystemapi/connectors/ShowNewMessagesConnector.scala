@@ -16,52 +16,39 @@
 
 package uk.gov.hmrc.excisemovementcontrolsystemapi.connectors
 
-import com.kenshoo.play.metrics.Metrics
 import play.api.Logging
 import play.api.mvc.Result
 import play.api.mvc.Results.InternalServerError
 import uk.gov.hmrc.excisemovementcontrolsystemapi.config.AppConfig
-import uk.gov.hmrc.excisemovementcontrolsystemapi.connectors.util.ResponseHandler
-import uk.gov.hmrc.excisemovementcontrolsystemapi.models.eis.{EISConsumptionHeader, EISConsumptionResponse, EISErrorMessage}
-import uk.gov.hmrc.excisemovementcontrolsystemapi.models.{EmcsUtils, MessageTypes}
-import uk.gov.hmrc.http.{HeaderCarrier, HttpClient, HttpResponse}
-import uk.gov.hmrc.http.HttpReads.Implicits._
+import uk.gov.hmrc.excisemovementcontrolsystemapi.connectors.util.{EisHttpClient, ResponseHandler}
+import uk.gov.hmrc.excisemovementcontrolsystemapi.models.MessageTypes
+import uk.gov.hmrc.excisemovementcontrolsystemapi.models.eis.{EISConsumptionResponse, EISErrorMessage}
+import uk.gov.hmrc.http.HeaderCarrier
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
 class ShowNewMessagesConnector @Inject()(
-                                          httpClient: HttpClient,
-                                          override val appConfig: AppConfig,
-                                          emcsUtils: EmcsUtils,
-                                          metrics: Metrics
-                                        )(implicit ec: ExecutionContext) extends EISConsumptionHeader with ResponseHandler with Logging {
+  eishttpClient: EisHttpClient,
+  appConfig: AppConfig
+)(implicit ec: ExecutionContext) extends ResponseHandler with Logging {
 
   def get(ern: String)(implicit hc: HeaderCarrier): Future[Either[Result, EISConsumptionResponse]] = {
 
-    val timer = metrics.defaultRegistry.timer("emcs.shownewmessage.timer").time()
-    val correlationId = emcsUtils.generateCorrelationId
-    val dateTime = emcsUtils.getCurrentDateTimeString
-
-    httpClient.GET[HttpResponse](
+    eishttpClient.get(
       appConfig.showNewMessageUrl,
+      ern,
       Seq("exciseregistrationnumber" -> ern),
-      build(correlationId, dateTime)
+      "emcs.shownewmessage.timer"
     ).map { response =>
 
       extractIfSuccessful[EISConsumptionResponse](response) match {
         case Right(eisResponse) => Right(eisResponse)
-        case Left(_) =>
-          logger.warn(EISErrorMessage(dateTime, ern, response.body, correlationId, MessageTypes.IE_NEW_MESSAGES.value))
+        case Left(errorResponse) =>
+          logger.warn(EISErrorMessage(errorResponse.createdDateTime, ern, errorResponse.body, errorResponse.correlationId, MessageTypes.IE_NEW_MESSAGES.value))
           Left(InternalServerError(response.body))
       }
     }
-      .andThen { case _ => timer.stop() }
-      .recover {
-        case ex: Throwable =>
-          logger.warn(EISErrorMessage(dateTime, ern, ex.getMessage, correlationId, MessageTypes.IE_NEW_MESSAGES.value))
-          Left(InternalServerError(ex.getMessage))
-      }
   }
 }
 
