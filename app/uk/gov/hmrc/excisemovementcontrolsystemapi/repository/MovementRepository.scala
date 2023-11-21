@@ -142,4 +142,5 @@ object MovementMessageRepository {
         .background(true)
     )
   }
+  }
 }

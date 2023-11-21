@@ -69,11 +69,14 @@ class DraftExciseMovementController @Inject()(
 
     workItemService.addWorkItemForErn(ern, fastMode = true)
 
-    movementMessageService.saveNewMovement(newMovement)
-      .flatMap {
-        case Right(msg) => Future.successful(Accepted(Json.toJson(ExciseMovementResponse("Accepted", msg.localReferenceNumber, msg.consignorId, msg.consigneeId))))
-        case Left(error) => Future.successful(error)
-      }
+    workItemService.createWorkItem(newMovement.consignorId).flatMap { _ =>
+      movementMessageService.saveMovementMessage(newMovement)
+        .flatMap {
+          case Right(msg) => Future.successful(Accepted(Json.toJson(ExciseMovementResponse("Accepted", msg.localReferenceNumber, msg.consignorId, msg.consigneeId))))
+          case Left(error) => Future.successful(InternalServerError(error.message))
+        }
+    }
+
 
   }
 

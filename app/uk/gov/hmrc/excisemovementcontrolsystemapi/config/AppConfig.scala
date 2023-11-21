@@ -21,6 +21,8 @@ import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.duration.{DAYS, Duration, FiniteDuration, HOURS, MINUTES, SECONDS}
+import javax.inject.{Inject, Singleton}
+import scala.concurrent.duration.{DAYS, Duration, FiniteDuration, SECONDS}
 
 @Singleton
 class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig) {
@@ -28,6 +30,9 @@ class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig)
   val appName: String = config.get[String]("appName")
 
   lazy val eisHost: String = servicesConfig.baseUrl("eis")
+  lazy val interval = config.getOptional[String]("scheduler.pollingNewMessageJob.interval")
+    .map(Duration.create(_).asInstanceOf[FiniteDuration])
+    .getOrElse(FiniteDuration(5, MINUTES))
 
   lazy val interval: FiniteDuration = config.getOptional[String]("scheduler.pollingNewMessageJob.interval")
     .map(Duration.create(_).asInstanceOf[FiniteDuration])

@@ -29,7 +29,7 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.eis.EISConsumptionRespo
 import uk.gov.hmrc.excisemovementcontrolsystemapi.services.{GetNewMessageServiceImpl, NewMessageParserService}
 import uk.gov.hmrc.http.HeaderCarrier
 
-import java.time.LocalDateTime
+import java.time.{LocalDateTime, ZoneOffset}
 import scala.concurrent.{ExecutionContext, Future}
 
 class GetNewMessageServiceSpec
@@ -56,7 +56,7 @@ class GetNewMessageServiceSpec
       when(showNewMessageConnector.get(any)(any))
         .thenReturn(Future.successful(Right(EISConsumptionResponse(dateTime, "123", "any message"))))
       when(messageReceiptConnector.put(any)(any))
-        .thenReturn(Future.successful(Right(MessageReceiptResponse(dateTime, "123", 10))))
+        .thenReturn(Future.successful(Right(MessageReceiptResponse(dateTime.toInstant(ZoneOffset.UTC), "123", 10))))
 
       val result = await(sut.getNewMessagesAndAcknowledge("123"))
 
@@ -73,7 +73,7 @@ class GetNewMessageServiceSpec
       when(showNewMessageConnector.get(any)(any))
         .thenReturn(Future.successful(Right(EISConsumptionResponse(dateTime, "123", ""))))
       when(messageReceiptConnector.put(any)(any))
-        .thenReturn(Future.successful(Right(MessageReceiptResponse(dateTime, "123", 10))))
+        .thenReturn(Future.successful(Right(MessageReceiptResponse(dateTime.toInstant(ZoneOffset.UTC), "123", 10))))
 
       await(sut.getNewMessagesAndAcknowledge("123"))
 
@@ -113,7 +113,7 @@ class GetNewMessageServiceSpec
         when(showNewMessageConnector.get(any)(any))
           .thenReturn(Future.successful(Left(InternalServerError("error"))))
         when(messageReceiptConnector.put(any)(any))
-          .thenReturn(Future.successful(Right(MessageReceiptResponse(dateTime, "123", 10))))
+          .thenReturn(Future.successful(Right(MessageReceiptResponse(dateTime.toInstant(ZoneOffset.UTC), "123", 10))))
 
         val result = await(sut.getNewMessagesAndAcknowledge("123"))
 

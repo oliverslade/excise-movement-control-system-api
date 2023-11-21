@@ -35,7 +35,7 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.utils.EmcsUtils
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.eis.Headers._
 import uk.gov.hmrc.http.{HeaderCarrier, HttpClient, HttpResponse}
 
-import java.time.LocalDateTime
+import java.time.Instant
 import scala.concurrent.ExecutionContext
 import scala.reflect.runtime.universe.typeOf
 
@@ -54,7 +54,7 @@ class MessageReceiptConnectorSpec
   private val emcsUtil = mock[EmcsUtils]
   private val sut = new MessageReceiptConnector(httpClient, appConfig, emcsUtil, metrics)
 
-  private val dateTime = LocalDateTime.of(2023, 1,2,3,4,5)
+  private val dateTime = Instant.now
   private val response = MessageReceiptResponse(dateTime, "123", 10)
 
   private val messagesBearerToken = "messagesBearerToken"

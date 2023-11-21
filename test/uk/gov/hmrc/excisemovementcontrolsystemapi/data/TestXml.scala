@@ -20,6 +20,108 @@ import scala.xml.Elem
 
 trait TestXml {
 
+  lazy val IE802 = <urn:IE802
+      xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE802:V3.01"
+      xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
+      xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"
+      xmlns="http://www.hmrc.gov.uk/ChRIS/Service/Control"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <urn:Header>
+      <urn1:MessageSender>CSMISE.EC</urn1:MessageSender>
+      <urn1:MessageRecipient>CSMISE.EC</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>98ad594a-78a0-4bbf-b524-33e927fe844f</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>07760ea5-0b47-4acb-9c53-516c70a6f0b6</urn1:CorrelationIdentifier>
+    </urn:Header>
+    <urn:Body>
+      <urn:ReminderMessageForExciseMovement>
+        <urn:Attributes>
+          <urn:DateAndTimeOfIssuanceOfReminder>2006-08-19T18:27:14</urn:DateAndTimeOfIssuanceOfReminder>
+          <!--Optional:-->
+          <urn:ReminderInformation language="to">token</urn:ReminderInformation>
+          <urn:LimitDateAndTime>2009-05-16T13:42:28</urn:LimitDateAndTime>
+          <urn:ReminderMessageType>2</urn:ReminderMessageType>
+        </urn:Attributes>
+        <urn:ExciseMovement>
+          <urn:AdministrativeReferenceCode>91CFRXRWG7MKAFUCDJPA6</urn:AdministrativeReferenceCode>
+          <urn:SequenceNumber>10</urn:SequenceNumber>
+        </urn:ExciseMovement>
+      </urn:ReminderMessageForExciseMovement>
+    </urn:Body>
+  </urn:IE802>
+
+  lazy val IE803 = <urn:IE803
+      xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE803:V3.01"
+      xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
+      xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"
+      xmlns="http://www.hmrc.gov.uk/ChRIS/Service/Control"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <urn:Header>
+      <urn1:MessageSender>CSMISE.EC</urn1:MessageSender>
+      <urn1:MessageRecipient>CSMISE.EC</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>a489157d-cd69-4370-a315-5fddee61ee0c</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>a3df9a67-3735-4983-a3a1-3987d34ca1f5</urn1:CorrelationIdentifier>
+    </urn:Header>
+    <urn:Body>
+      <urn:NotificationOfDivertedEADESAD>
+        <urn:ExciseNotification>
+          <urn:NotificationType>1</urn:NotificationType>
+          <urn:NotificationDateAndTime>2018-11-01T05:36:46</urn:NotificationDateAndTime>
+          <urn:AdministrativeReferenceCode>91CFRXRWG7MKAFUCDJPA6</urn:AdministrativeReferenceCode>
+          <urn:SequenceNumber>1</urn:SequenceNumber>
+        </urn:ExciseNotification>
+        <!--0 to 9 repetitions:-->
+        <urn:DownstreamArc>
+          <urn:AdministrativeReferenceCode>91CFRXRWG7MKAFUCDJPA6</urn:AdministrativeReferenceCode>
+        </urn:DownstreamArc>
+      </urn:NotificationOfDivertedEADESAD>
+    </urn:Body>
+  </urn:IE803>
+
+  lazy val IE807 = <urn:IE807
+      xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE807:V3.01"
+      xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
+      xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"
+      xmlns="http://www.hmrc.gov.uk/ChRIS/Service/Control"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <urn:Header>
+      <urn1:MessageSender>NDEA.XI</urn1:MessageSender>
+      <urn1:MessageRecipient>NDEA.XI</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>1ef3e0d6-1201-4c27-9b0d-305c5f8b2230</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>fbf2d42a-19b0-4d7e-b255-94b6b31ebac5</urn1:CorrelationIdentifier>
+    </urn:Header>
+    <urn:Body>
+      <urn:InterruptionOfMovement>
+        <urn:Attributes>
+          <urn:AdministrativeReferenceCode>91CFRXRWG7MKAFUCDJPA6</urn:AdministrativeReferenceCode>
+          <!--Optional:-->
+          <urn:ComplementaryInformation language="to">token</urn:ComplementaryInformation>
+          <urn:DateAndTimeOfIssuance>2006-08-19T18:27:14</urn:DateAndTimeOfIssuance>
+          <urn:ReasonForInterruptionCode>12</urn:ReasonForInterruptionCode>
+          <urn:ReferenceNumberOfExciseOffice>ABdvRT13</urn:ReferenceNumberOfExciseOffice>
+          <!--Optional:-->
+          <urn:ExciseOfficerIdentification>token</urn:ExciseOfficerIdentification>
+        </urn:Attributes>
+        <!--0 to 9 repetitions:-->
+        <urn:ReferenceControlReport>
+          <urn:ControlReportReference>AFavAV24a5RV1aD2</urn:ControlReportReference>
+        </urn:ReferenceControlReport>
+        <!--0 to 9 repetitions:-->
+        <urn:ReferenceEventReport>
+          <urn:EventReportNumber>AFavAV24a5RV1aD2</urn:EventReportNumber>
+        </urn:ReferenceEventReport>
+      </urn:InterruptionOfMovement>
+    </urn:Body>
+  </urn:IE807>
+
   lazy val IE810: Elem = <urn:IE810 xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE810:V3.01"
                                     xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
                                     xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"
@@ -324,6 +426,59 @@ trait TestXml {
       </urn:Body>
     </urn:IE819>
 
+  lazy val IE829: Elem = <urn:IE829
+      xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE829:V3.01"
+      xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
+      xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"
+      xmlns="http://www.hmrc.gov.uk/ChRIS/Service/Control"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <urn:Header>
+      <urn1:MessageSender>NDEA.XI</urn1:MessageSender>
+      <urn1:MessageRecipient>NDEA.XI</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2009-06-10</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>23:33:23</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>329a9edb-4a30-4a62-9f41-7450e8bc9c4c</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>35e81e00-0658-4469-8d57-fd219a27cc2e</urn1:CorrelationIdentifier>
+    </urn:Header>
+    <urn:Body>
+      <urn:NotificationOfAcceptedExport>
+        <urn:Attributes>
+          <urn:DateAndTimeOfIssuance>2016-10-25T04:28:36</urn:DateAndTimeOfIssuance>
+        </urn:Attributes>
+        <!--Optional:-->
+        <urn:ConsigneeTrader language="to">
+          <!--Optional:-->
+          <urn:Traderid>GBWK002671021</urn:Traderid>
+          <urn:TraderName>token</urn:TraderName>
+          <urn:StreetName>token</urn:StreetName>
+          <!--Optional:-->
+          <urn:StreetNumber>token</urn:StreetNumber>
+          <urn:Postcode>token</urn:Postcode>
+          <urn:City>token</urn:City>
+          <!--Optional:-->
+          <urn:EoriNumber>token</urn:EoriNumber>
+        </urn:ConsigneeTrader>
+        <!--1 to 99 repetitions:-->
+        <urn:ExciseMovementEad>
+          <urn:AdministrativeReferenceCode>91CFRXRWG7MKAFUCDJPA6</urn:AdministrativeReferenceCode>
+          <urn:SequenceNumber>4</urn:SequenceNumber>
+        </urn:ExciseMovementEad>
+        <!--Optional:-->
+        <urn:ExportPlaceCustomsOffice>
+          <urn:ReferenceNumber>GB054045</urn:ReferenceNumber>
+        </urn:ExportPlaceCustomsOffice>
+        <urn:ExportAcceptance>
+          <urn:ReferenceNumberOfSenderCustomsOffice>GB004323</urn:ReferenceNumberOfSenderCustomsOffice>
+          <!--Optional:-->
+          <urn:IdentificationOfSenderCustomsOfficer>token</urn:IdentificationOfSenderCustomsOfficer>
+          <urn:DateOfAcceptance>2014-01-07</urn:DateOfAcceptance>
+          <urn:DocumentReferenceNumber>token</urn:DocumentReferenceNumber>
+        </urn:ExportAcceptance>
+      </urn:NotificationOfAcceptedExport>
+    </urn:Body>
+  </urn:IE829>
+
   lazy val IE837WithConsignor: Elem =
     <urn:IE837 xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE837:V3.01"
                xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
@@ -388,6 +543,262 @@ trait TestXml {
       </urn:Body>
     </urn:IE837>
 
+  lazy val IE839: Elem = <urn:IE839
+    xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE839:V3.01"
+    xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
+    xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"
+    xmlns="http://www.hmrc.gov.uk/ChRIS/Service/Control"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <urn:Header>
+        <urn1:MessageSender>NDEA.XI</urn1:MessageSender>
+        <urn1:MessageRecipient>NDEA.XI</urn1:MessageRecipient>
+        <urn1:DateOfPreparation>2011-06-29</urn1:DateOfPreparation>
+        <urn1:TimeOfPreparation>20:24:23</urn1:TimeOfPreparation>
+        <urn1:MessageIdentifier>9b60495c-e967-4d8c-8df0-e60a7a33cd80</urn1:MessageIdentifier>
+        <!--Optional:-->
+        <urn1:CorrelationIdentifier>0a2eb5f2-53ce-41e1-add8-2e957ee079f4</urn1:CorrelationIdentifier>
+      </urn:Header>
+      <urn:Body>
+        <urn:RefusalByCustoms>
+          <urn:Attributes>
+            <urn:DateAndTimeOfIssuance>2012-11-05T00:24:55</urn:DateAndTimeOfIssuance>
+          </urn:Attributes>
+          <!--Optional:-->
+          <urn:ConsigneeTrader language="to">
+            <!--Optional:-->
+            <urn:Traderid>GBWK002281010</urn:Traderid>
+            <urn:TraderName>token</urn:TraderName>
+            <urn:StreetName>token</urn:StreetName>
+            <!--Optional:-->
+            <urn:StreetNumber>token</urn:StreetNumber>
+            <urn:Postcode>token</urn:Postcode>
+            <urn:City>token</urn:City>
+            <!--Optional:-->
+            <urn:EoriNumber>token</urn:EoriNumber>
+          </urn:ConsigneeTrader>
+          <!--Optional:-->
+          <urn:ExportPlaceCustomsOffice>
+            <urn:ReferenceNumber>GB004045</urn:ReferenceNumber>
+          </urn:ExportPlaceCustomsOffice>
+          <!--Optional:-->
+          <urn:ExportCrossCheckingDiagnoses>
+            <!--Optional:-->
+            <urn:LocalReferenceNumber>token</urn:LocalReferenceNumber>
+            <!--Optional:-->
+            <urn:DocumentReferenceNumber>token</urn:DocumentReferenceNumber>
+            <!--1 or more repetitions:-->
+            <urn:Diagnosis>
+              <urn:AdministrativeReferenceCode>91CFRXRWG7MKAFUCDJPA6</urn:AdministrativeReferenceCode>
+              <urn:BodyRecordUniqueReference>234</urn:BodyRecordUniqueReference>
+              <urn:DiagnosisCode>3</urn:DiagnosisCode>
+            </urn:Diagnosis>
+          </urn:ExportCrossCheckingDiagnoses>
+          <urn:Rejection>
+            <urn:RejectionDateAndTime>2003-03-28T17:17:22</urn:RejectionDateAndTime>
+            <urn:RejectionReasonCode>2</urn:RejectionReasonCode>
+          </urn:Rejection>
+          <!--0 to 99 repetitions:-->
+          <urn:CEadVal>
+            <urn:AdministrativeReferenceCode>91CFRXRWG7MKAFUCDJPA6</urn:AdministrativeReferenceCode>
+            <urn:SequenceNumber>3</urn:SequenceNumber>
+          </urn:CEadVal>
+          <!--Optional:-->
+          <urn:NEadSub>
+            <urn:LocalReferenceNumber>token</urn:LocalReferenceNumber>
+          </urn:NEadSub>
+        </urn:RefusalByCustoms>
+      </urn:Body>
+    </urn:IE839>
+
+  lazy val IE840 = <urn:IE840
+  xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE840:V3.01"
+  xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
+  xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"
+  xmlns="http://www.hmrc.gov.uk/ChRIS/Service/Control"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <urn:Header>
+      <urn1:MessageSender>NDEA.XI</urn1:MessageSender>
+      <urn1:MessageRecipient>NDEA.XI</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2017-02-08</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>03:01:47</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>d56198c9-7f17-4598-a0a1-b9c20ec06798</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>4a768bff-e8b0-4689-a2b3-8a6a0c1e0805</urn1:CorrelationIdentifier>
+    </urn:Header>
+    <urn:Body>
+      <urn:EventReportEnvelope>
+        <urn:Attributes>
+          <urn:EventReportMessageType>3</urn:EventReportMessageType>
+          <!--Optional:-->
+          <urn:DateAndTimeOfValidationOfEventReport>2009-12-15T07:25:57</urn:DateAndTimeOfValidationOfEventReport>
+        </urn:Attributes>
+        <urn:HeaderEventReport>
+          <!--Optional:-->
+          <urn:EventReportNumber>AFavAV24a5RV1aD2</urn:EventReportNumber>
+          <!--Optional:-->
+          <urn:MsOfSubmissionEventReportReference>token</urn:MsOfSubmissionEventReportReference>
+          <urn:ReferenceNumberOfExciseOffice>ABdvRT13</urn:ReferenceNumberOfExciseOffice>
+          <urn:MemberStateOfEvent>DH</urn:MemberStateOfEvent>
+        </urn:HeaderEventReport>
+        <!--Optional:-->
+        <urn:ExciseMovement>
+          <urn:AdministrativeReferenceCode>91CFRXRWG7MKAFUCDJPA6</urn:AdministrativeReferenceCode>
+          <urn:SequenceNumber>13</urn:SequenceNumber>
+        </urn:ExciseMovement>
+        <!--Optional:-->
+        <urn:OtherAccompanyingDocument>
+          <urn:OtherAccompanyingDocumentType>2</urn:OtherAccompanyingDocumentType>
+          <!--Optional:-->
+          <urn:ShortDescriptionOfOtherAccompanyingDocument language="to">token</urn:ShortDescriptionOfOtherAccompanyingDocument>
+          <urn:OtherAccompanyingDocumentNumber>token</urn:OtherAccompanyingDocumentNumber>
+          <urn:OtherAccompanyingDocumentDate>2006-12-04</urn:OtherAccompanyingDocumentDate>
+          <!--Optional:-->
+          <urn:ImageOfOtherAccompanyingDocument>YWx0b3M=</urn:ImageOfOtherAccompanyingDocument>
+          <urn:MemberStateOfDispatch>to</urn:MemberStateOfDispatch>
+          <urn:MemberStateOfDestination>to</urn:MemberStateOfDestination>
+          <!--0 to 9 repetitions:-->
+          <urn:PersonInvolvedInMovementTrader language="to">
+            <!--Optional:-->
+            <urn:TraderExciseNumber>GBWK0033815At</urn:TraderExciseNumber>
+            <!--Optional:-->
+            <urn:Traderid>token</urn:Traderid>
+            <!--Optional:-->
+            <urn:TraderName>token</urn:TraderName>
+            <!--Optional:-->
+            <urn:TraderPersonType>2</urn:TraderPersonType>
+            <!--Optional:-->
+            <urn:MemberStateCode>AD</urn:MemberStateCode>
+            <!--Optional:-->
+            <urn:StreetName>token</urn:StreetName>
+            <!--Optional:-->
+            <urn:StreetNumber>token</urn:StreetNumber>
+            <!--Optional:-->
+            <urn:Postcode>token</urn:Postcode>
+            <!--Optional:-->
+            <urn:City>token</urn:City>
+            <!--Optional:-->
+            <urn:PhoneNumber>token</urn:PhoneNumber>
+            <!--Optional:-->
+            <urn:FaxNumber>token</urn:FaxNumber>
+            <!--Optional:-->
+            <urn:EmailAddress>token</urn:EmailAddress>
+          </urn:PersonInvolvedInMovementTrader>
+          <!--Zero or more repetitions:-->
+          <urn:GoodsItem>
+            <!--Optional:-->
+            <urn:DescriptionOfTheGoods>token</urn:DescriptionOfTheGoods>
+            <!--Optional:-->
+            <urn:CnCode>15367567</urn:CnCode>
+            <!--Optional:-->
+            <urn:CommercialDescriptionOfTheGoods>token</urn:CommercialDescriptionOfTheGoods>
+            <!--Optional:-->
+            <urn:AdditionalCode>token</urn:AdditionalCode>
+            <!--Optional:-->
+            <urn:Quantity>1000.0</urn:Quantity>
+            <!--Optional:-->
+            <urn:UnitOfMeasureCode>12</urn:UnitOfMeasureCode>
+            <!--Optional:-->
+            <urn:GrossMass>1000.0</urn:GrossMass>
+            <!--Optional:-->
+            <urn:NetMass>1000.0</urn:NetMass>
+          </urn:GoodsItem>
+          <!--Optional:-->
+          <urn:MeansOfTransport>
+            <urn:TraderName>token</urn:TraderName>
+            <urn:StreetName>token</urn:StreetName>
+            <!--Optional:-->
+            <urn:StreetNumber>token</urn:StreetNumber>
+            <urn:TransporterCountry>to</urn:TransporterCountry>
+            <urn:Postcode>token</urn:Postcode>
+            <urn:City>token</urn:City>
+            <urn:TransportModeCode>12</urn:TransportModeCode>
+            <!--Optional:-->
+            <urn:AcoComplementaryInformation language="to">token</urn:AcoComplementaryInformation>
+            <urn:Registration>token</urn:Registration>
+            <urn:CountryOfRegistration>to</urn:CountryOfRegistration>
+          </urn:MeansOfTransport>
+        </urn:OtherAccompanyingDocument>
+        <urn:EventReport>
+          <urn:DateOfEvent>2002-01-29</urn:DateOfEvent>
+          <urn:PlaceOfEvent language="to">token</urn:PlaceOfEvent>
+          <!--Optional:-->
+          <urn:ExciseOfficerIdentification>token</urn:ExciseOfficerIdentification>
+          <urn:SubmittingPerson>token</urn:SubmittingPerson>
+          <urn:SubmittingPersonCode>12</urn:SubmittingPersonCode>
+          <!--Optional:-->
+          <urn:SubmittingPersonComplement language="to">token</urn:SubmittingPersonComplement>
+          <!--Optional:-->
+          <urn:ChangedTransportArrangement>4</urn:ChangedTransportArrangement>
+          <!--Optional:-->
+          <urn:Comments language="to">token</urn:Comments>
+        </urn:EventReport>
+        <!--0 to 9 repetitions:-->
+        <urn:EvidenceOfEvent>
+          <!--Optional:-->
+          <urn:IssuingAuthority language="to">token</urn:IssuingAuthority>
+          <urn:EvidenceTypeCode>1</urn:EvidenceTypeCode>
+          <urn:ReferenceOfEvidence language="to">token</urn:ReferenceOfEvidence>
+          <!--Optional:-->
+          <urn:ImageOfEvidence>ZXQ=</urn:ImageOfEvidence>
+          <!--Optional:-->
+          <urn:EvidenceTypeComplement language="to">token</urn:EvidenceTypeComplement>
+        </urn:EvidenceOfEvent>
+        <!--Optional:-->
+        <urn:NewTransportArrangerTrader language="to">
+          <!--Optional:-->
+          <urn:VatNumber>token</urn:VatNumber>
+          <urn:TraderName>token</urn:TraderName>
+          <urn:StreetName>token</urn:StreetName>
+          <!--Optional:-->
+          <urn:StreetNumber>token</urn:StreetNumber>
+          <urn:Postcode>token</urn:Postcode>
+          <urn:City>token</urn:City>
+        </urn:NewTransportArrangerTrader>
+        <!--Optional:-->
+        <urn:NewTransporterTrader language="to">
+          <!--Optional:-->
+          <urn:VatNumber>token</urn:VatNumber>
+          <urn:TraderName>token</urn:TraderName>
+          <urn:StreetName>token</urn:StreetName>
+          <!--Optional:-->
+          <urn:StreetNumber>token</urn:StreetNumber>
+          <urn:Postcode>token</urn:Postcode>
+          <urn:City>token</urn:City>
+        </urn:NewTransporterTrader>
+        <!--0 to 99 repetitions:-->
+        <urn:TransportDetails>
+          <urn:TransportUnitCode>12</urn:TransportUnitCode>
+          <!--Optional:-->
+          <urn:IdentityOfTransportUnits>token</urn:IdentityOfTransportUnits>
+          <!--Optional:-->
+          <urn:CommercialSealIdentification>token</urn:CommercialSealIdentification>
+          <!--Optional:-->
+          <urn:ComplementaryInformation language="to">token</urn:ComplementaryInformation>
+          <!--Optional:-->
+          <urn:SealInformation language="to">token</urn:SealInformation>
+        </urn:TransportDetails>
+        <!--0 to 99 repetitions:-->
+        <urn:BodyEventReport>
+          <urn:EventTypeCode>12</urn:EventTypeCode>
+          <!--Optional:-->
+          <urn:AssociatedInformation language="to">token</urn:AssociatedInformation>
+          <!--Optional:-->
+          <urn:BodyRecordUniqueReference>34</urn:BodyRecordUniqueReference>
+          <!--Optional:-->
+          <urn:DescriptionOfTheGoods>token</urn:DescriptionOfTheGoods>
+          <!--Optional:-->
+          <urn:CnCode>15367534</urn:CnCode>
+          <!--Optional:-->
+          <urn:AdditionalCode>token</urn:AdditionalCode>
+          <!--Optional:-->
+          <urn:IndicatorOfShortageOrExcess>E</urn:IndicatorOfShortageOrExcess>
+          <!--Optional:-->
+          <urn:ObservedShortageOrExcess>1000.0</urn:ObservedShortageOrExcess>
+        </urn:BodyEventReport>
+      </urn:EventReportEnvelope>
+    </urn:Body>
+  </urn:IE840>
+
   lazy val IE871: Elem =
     <urn:IE871 xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE871:V3.01"
                xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
@@ -425,5 +836,149 @@ trait TestXml {
       </urn:ExplanationOnReasonForShortage>
     </urn:Body>
     </urn:IE871>
+
+  lazy val IE880: Elem = <urn:IE880
+    xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE880:V3.01"
+    xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
+    xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"
+    xmlns="http://www.hmrc.gov.uk/ChRIS/Service/Control"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <urn:Header>
+      <urn1:MessageSender>NDEA.XI</urn1:MessageSender>
+      <urn1:MessageRecipient>NDEA.XI</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>91CFRXRWG7MKAFUCDJPA6</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>91CFRXRWG7MKAFUCDJPA6</urn1:CorrelationIdentifier>
+    </urn:Header>
+    <urn:Body>
+      <urn:ManualClosureRequest>
+        <urn:Attributes>
+          <urn:AdministrativeReferenceCode>tokentokentokentokent</urn:AdministrativeReferenceCode>
+          <urn:SequenceNumber>to</urn:SequenceNumber>
+          <urn:ManualClosureRequestReasonCode>t</urn:ManualClosureRequestReasonCode>
+          <!--Optional:-->
+          <urn:ManualClosureRequestReasonCodeComplement language="to">token</urn:ManualClosureRequestReasonCodeComplement>
+        </urn:Attributes>
+        <!--0 to 9 repetitions:-->
+        <urn:SupportingDocuments>
+          <!--Optional:-->
+          <urn:SupportingDocumentDescription language="to">token</urn:SupportingDocumentDescription>
+          <!--Optional:-->
+          <urn:ReferenceOfSupportingDocument language="to">token</urn:ReferenceOfSupportingDocument>
+          <!--Optional:-->
+          <urn:ImageOfDocument>dmVudG9z</urn:ImageOfDocument>
+          <!--Optional:-->
+          <urn:SupportingDocumentType>toke</urn:SupportingDocumentType>
+        </urn:SupportingDocuments>
+        <!--Zero or more repetitions:-->
+        <urn:BodyManualClosure>
+          <urn:BodyRecordUniqueReference>tok</urn:BodyRecordUniqueReference>
+          <!--Optional:-->
+          <urn:IndicatorOfShortageOrExcess>S</urn:IndicatorOfShortageOrExcess>
+          <!--Optional:-->
+          <urn:ObservedShortageOrExcess>1000.0</urn:ObservedShortageOrExcess>
+          <!--Optional:-->
+          <urn:ExciseProductCode>toke</urn:ExciseProductCode>
+          <!--Optional:-->
+          <urn:RefusedQuantity>1000.0</urn:RefusedQuantity>
+          <!--Optional:-->
+          <urn:ComplementaryInformation language="to">token</urn:ComplementaryInformation>
+        </urn:BodyManualClosure>
+      </urn:ManualClosureRequest>
+    </urn:Body>
+  </urn:IE880>
+
+  lazy val IE881: Elem = <urn:IE881
+  xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE881:V3.01"
+  xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
+  xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"
+  xmlns="http://www.hmrc.gov.uk/ChRIS/Service/Control"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <urn:Header>
+      <urn1:MessageSender>NDEA.XI</urn1:MessageSender>
+      <urn1:MessageRecipient>NDEA.XI</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2000-01-03</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>03:03:53</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>8c7e47b1-a294-4a12-a00b-f9b1d3bb4af6</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>2815389c-a16c-47e3-8ad9-18bfa76703a5</urn1:CorrelationIdentifier>
+    </urn:Header>
+    <urn:Body>
+      <urn:ManualClosureResponse>
+        <urn:Attributes>
+          <urn:AdministrativeReferenceCode>91CFRXRWG7MKAFUCDJPA6</urn:AdministrativeReferenceCode>
+          <urn:SequenceNumber>13</urn:SequenceNumber>
+          <!--Optional:-->
+          <urn:DateOfArrivalOfExciseProducts>2015-12-11</urn:DateOfArrivalOfExciseProducts>
+          <!--Optional:-->
+          <urn:GlobalConclusionOfReceipt>2</urn:GlobalConclusionOfReceipt>
+          <!--Optional:-->
+          <urn:ComplementaryInformation language="to">token</urn:ComplementaryInformation>
+          <urn:ManualClosureRequestReasonCode>1</urn:ManualClosureRequestReasonCode>
+          <!--Optional:-->
+          <urn:ManualClosureRequestReasonCodeComplement language="to">token</urn:ManualClosureRequestReasonCodeComplement>
+          <urn:ManualClosureRequestAccepted>1</urn:ManualClosureRequestAccepted>
+          <!--Optional:-->
+          <urn:ManualClosureRejectionReasonCode>2</urn:ManualClosureRejectionReasonCode>
+          <!--Optional:-->
+          <urn:ManualClosureRejectionComplement language="to">token</urn:ManualClosureRejectionComplement>
+        </urn:Attributes>
+        <!--0 to 9 repetitions:-->
+        <urn:SupportingDocuments>
+          <!--Optional:-->
+          <urn:SupportingDocumentDescription language="to">token</urn:SupportingDocumentDescription>
+          <!--Optional:-->
+          <urn:ReferenceOfSupportingDocument language="to">token</urn:ReferenceOfSupportingDocument>
+          <!--Optional:-->
+          <urn:ImageOfDocument>dGFsaWE=</urn:ImageOfDocument>
+          <!--Optional:-->
+          <urn:SupportingDocumentType>toke</urn:SupportingDocumentType>
+        </urn:SupportingDocuments>
+        <!--Zero or more repetitions:-->
+        <urn:BodyManualClosure>
+          <urn:BodyRecordUniqueReference>67</urn:BodyRecordUniqueReference>
+          <!--Optional:-->
+          <urn:IndicatorOfShortageOrExcess>E</urn:IndicatorOfShortageOrExcess>
+          <!--Optional:-->
+          <urn:ObservedShortageOrExcess>1000.0</urn:ObservedShortageOrExcess>
+          <!--Optional:-->
+          <urn:ExciseProductCode>toke</urn:ExciseProductCode>
+          <!--Optional:-->
+          <urn:RefusedQuantity>1000.0</urn:RefusedQuantity>
+          <!--Optional:-->
+          <urn:ComplementaryInformation language="to">token</urn:ComplementaryInformation>
+        </urn:BodyManualClosure>
+      </urn:ManualClosureResponse>
+    </urn:Body>
+  </urn:IE881>
+
+  lazy val IE905: Elem = <urn:IE905
+      xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE905:V3.01"
+      xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"
+      xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope"
+      xmlns="http://www.hmrc.gov.uk/ChRIS/Service/Control"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <urn:Header>
+      <urn1:MessageSender>NDEA.XI</urn1:MessageSender>
+      <urn1:MessageRecipient>NDEA.XI</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2002-01-15</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>23:28:52</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>1375e6ce-f037-49cb-a7ca-3d21c7c6f435</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>8ef3c27e-edef-48f9-8788-a53149211841</urn1:CorrelationIdentifier>
+    </urn:Header>
+    <urn:Body>
+      <urn:StatusResponse>
+        <urn:Attributes>
+          <urn:AdministrativeReferenceCode>91CFRXRWG7MKAFUCDJPA6</urn:AdministrativeReferenceCode>
+          <urn:SequenceNumber>4</urn:SequenceNumber>
+          <urn:Status>X03</urn:Status>
+          <urn:LastReceivedMessageType>IE905</urn:LastReceivedMessageType>
+        </urn:Attributes>
+      </urn:StatusResponse>
+    </urn:Body>
+  </urn:IE905>
 
 }

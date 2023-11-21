@@ -1,0 +1,56 @@
+/*
+ * Copyright 2023 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages
+
+import generated.{IE829Type, MessagesOption}
+import scalaxb.DataRecord
+import uk.gov.hmrc.excisemovementcontrolsystemapi.models.MessageTypes
+
+import scala.xml.NodeSeq
+
+case class IE829Message
+(
+  private val obj: IE829Type,
+  private val key: Option[String],
+  private val namespace: Option[String]
+) extends IEMessage {
+  override def consigneeId: Option[String] =
+    obj.Body.NotificationOfAcceptedExport.ConsigneeTrader.flatMap(_.Traderid)
+
+  // Todo: this message contains a list of ExciseMovementsEad which contains
+  // the ARC. At the moment we are getting the first ARC from the list. Is this right?
+  override def administrativeReferenceCode: Option[String] =
+    obj.Body.NotificationOfAcceptedExport.ExciseMovementEad.headOption.map(_.AdministrativeReferenceCode)
+
+  override def messageType: String = MessageTypes.IE829.value
+
+  override def toXml: NodeSeq =
+    scalaxb.toXML[IE829Type](obj, namespace, key, generated.defaultScope)
+
+  override def lrnEquals(lrn: String): Boolean = false
+}
+
+object IE829Message {
+  def apply(message: DataRecord[MessagesOption]): IE829Message = {
+    IE829Message(message.as[IE829Type], message.key, message.namespace)
+  }
+
+  def createFromXml(xml: NodeSeq): IE829Message = {
+    val ie829: IE829Type = scalaxb.fromXML[IE829Type](xml)
+    IE829Message(ie829, Some(ie829.productPrefix), None)
+  }
+}

@@ -104,7 +104,6 @@ class MovementService @Inject()(
   def updateMovement(message: IEMessage, consignorId: String): Future[Boolean] = {
 
     movementRepository.getAllBy(consignorId).flatMap(cachedMovement => {
-
       val arc = message.administrativeReferenceCode
       val movementWithArc = cachedMovement.filter(o => o.administrativeReferenceCode.equals(arc)).headOption
       val movementWithLrn = cachedMovement.filter(m => message.lrnEquals(m.localReferenceNumber)).headOption
@@ -131,7 +130,7 @@ class MovementService @Inject()(
       messages = allMessages
     )
 
-    movementRepository.updateMovement(newMovement).map {
+     movementRepository.updateMovement(newMovement).map {
       case true => true
       case _ => false
     }

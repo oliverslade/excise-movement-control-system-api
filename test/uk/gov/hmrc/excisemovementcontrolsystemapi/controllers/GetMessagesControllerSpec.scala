@@ -33,6 +33,7 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.fixture.{FakeAuthentication, F
 import uk.gov.hmrc.excisemovementcontrolsystemapi.repository.model.{Message, Movement}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.services.{MovementService, WorkItemService}
 import uk.gov.hmrc.mongo.TimestampSupport
+import uk.gov.hmrc.mongo.TimestampSupport
 
 import java.time.Instant
 import scala.concurrent.{ExecutionContext, Future}

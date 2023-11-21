@@ -43,6 +43,14 @@ object Movement {
   implicit val format: OFormat[Movement] = Json.format[Movement]
 }
 
+//todo remove hash from message. Hash can calculate on the go
+case class Message private(
+  hash: Int,
+  encodedMessage: String,
+  messageType: String,
+  createdOn: Instant
+)
+
 object Message {
   def apply(
              encodedMessage: String,
