@@ -20,17 +20,18 @@ import generated.{IE704Type, MessagesOption}
 import play.api.libs.json.{JsValue, Json}
 import scalaxb.DataRecord
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.MessageTypes
+import uk.gov.hmrc.excisemovementcontrolsystemapi.utils.XmlScope
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType.Refused
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats.GeneratedJsonWriters
 
-import scala.xml.NodeSeq
+import scala.xml.NamespaceBinding
 
 case class IE704Message
 (
   private val obj: IE704Type,
   private val key: Option[String],
-  private val namespace: Option[String],
+  private val scope: NamespaceBinding,
   auditType: AuditType
 ) extends IEMessage with GeneratedJsonWriters {
   override def consigneeId: Option[String] = None
@@ -45,8 +46,9 @@ case class IE704Message
 
   override def messageIdentifier: String = obj.Header.MessageIdentifier
 
-  override def toXml: NodeSeq =
-    scalaxb.toXML[IE704Type](obj, namespace, key, generated.defaultScope)
+  override def toXml: NodeSeq = {
+    scalaxb.toXML[IE704Type](obj, key.getOrElse(MessageTypes.IE704.value), scope)
+  }
 
   override def toJson: JsValue = Json.toJson(obj)
 
@@ -65,13 +67,14 @@ case class IE704Message
 
 }
 
-object IE704Message {
-  def apply(message: DataRecord[MessagesOption]): IE704Message = {
-    IE704Message(message.as[IE704Type], message.key, message.namespace, Refused)
+object IE704Message extends XmlScope {
+
+  def apply(message: DataRecord[MessagesOption], scope: NamespaceBinding): IE704Message = {
+    IE704Message(message.as[IE704Type], message.key, scope, Refused)
   }
 
-  def createFromXml(xml: NodeSeq): IE704Message = {
-    val ie704: IE704Type = scalaxb.fromXML[IE704Type](xml)
-    IE704Message(ie704, Some(ie704.productPrefix), None, Refused)
+  def createFromXml(xmlMessage: NodeSeq): IE704Message = {
+    val ie704: IE704Type = scalaxb.fromXML[IE704Type](xmlMessage)
+    IE704Message(ie704, Some(ie704.productPrefix), createScopeFromXml(xmlMessage, xmlMessage.head.label), Refused)
   }
 }

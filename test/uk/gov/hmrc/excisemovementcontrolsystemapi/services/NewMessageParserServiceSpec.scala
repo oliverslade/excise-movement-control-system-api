@@ -55,10 +55,10 @@ class NewMessageParserServiceSpec
       val encodeGetNewMessage = Base64.getEncoder.encodeToString(
         newMessageWith818And802.toString.getBytes(StandardCharsets.UTF_8)
       )
-      when(messageFactory.createIEMessage(any)).thenReturn(message1, message2)
+      when(messageFactory.createIEMessage(any, any)).thenReturn(message1, message2)
 
       parser.extractMessages(encodeGetNewMessage) mustBe Seq(message1, message2)
-      verify(messageFactory, times(2)).createIEMessage(any)
+      verify(messageFactory, times(2)).createIEMessage(any, any)
     }
 
     "handle an empty list of messages" in {

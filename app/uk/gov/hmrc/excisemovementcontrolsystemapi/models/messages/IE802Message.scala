@@ -24,13 +24,13 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType.Reminder
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats.GeneratedJsonWriters
 
-import scala.xml.NodeSeq
+import scala.xml.{NamespaceBinding, TopScope}
 
 case class IE802Message
 (
   private val obj: IE802Type,
   private val key: Option[String],
-  private val namespace: Option[String],
+  private val scope: NamespaceBinding,
   auditType: AuditType
 ) extends IEMessage with GeneratedJsonWriters {
 
@@ -40,7 +40,7 @@ case class IE802Message
     Seq(Some(obj.Body.ReminderMessageForExciseMovement.ExciseMovement.AdministrativeReferenceCode))
 
   override def toXml: NodeSeq = {
-    scalaxb.toXML[IE802Type](obj, namespace, key, generated.defaultScope)
+    scalaxb.toXML[IE802Type](obj, key.getOrElse(MessageTypes.IE802.value), scope)
   }
 
   override def toJson: JsValue = Json.toJson(obj)
@@ -56,12 +56,12 @@ case class IE802Message
 }
 
 object IE802Message {
-  def apply(message: DataRecord[MessagesOption]): IE802Message = {
-    IE802Message(message.as[IE802Type], message.key, message.namespace, Reminder)
+  def apply(message: DataRecord[MessagesOption], scope: NamespaceBinding): IE802Message = {
+    IE802Message(message.as[IE802Type], message.key, scope, Reminder)
   }
 
   def createFromXml(xml: NodeSeq): IE802Message = {
     val ie802: IE802Type = scalaxb.fromXML[IE802Type](xml)
-    IE802Message(ie802, Some(ie802.productPrefix), None, Reminder)
+    IE802Message(ie802, Some(ie802.productPrefix), TopScope, Reminder)
   }
 }

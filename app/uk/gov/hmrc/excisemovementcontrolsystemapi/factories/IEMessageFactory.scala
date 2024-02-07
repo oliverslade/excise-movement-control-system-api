@@ -21,30 +21,30 @@ import scalaxb.DataRecord
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.MessageTypes
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages._
 
-import scala.xml.NodeSeq
+import scala.xml.{NamespaceBinding, NodeSeq}
 
 case class IEMessageFactory() {
-  def createIEMessage(message: DataRecord[MessagesOption]): IEMessage = {
-    val messageType = message.key.getOrElse(throw new IEMessageFactoryException("Could not create Message object. Message type is empty"))
+  def createIEMessage(message: DataRecord[MessagesOption], scope: NamespaceBinding): IEMessage = {
+    val messageType = message.key.getOrElse(throw new RuntimeException("[IEMessageFactory] - Could not create Message object. Message type is empty"))
 
     MessageTypes.withValueOpt(messageType) match {
-      case Some(MessageTypes.IE704) => IE704Message(message)
-      case Some(MessageTypes.IE801) => IE801Message(message)
-      case Some(MessageTypes.IE802) => IE802Message(message)
-      case Some(MessageTypes.IE803) => IE803Message(message)
-      case Some(MessageTypes.IE807) => IE807Message(message)
-      case Some(MessageTypes.IE810) => IE810Message(message)
-      case Some(MessageTypes.IE813) => IE813Message(message)
-      case Some(MessageTypes.IE818) => IE818Message(message)
-      case Some(MessageTypes.IE819) => IE819Message(message)
-      case Some(MessageTypes.IE829) => IE829Message(message)
-      case Some(MessageTypes.IE837) => IE837Message(message)
-      case Some(MessageTypes.IE839) => IE839Message(message)
-      case Some(MessageTypes.IE840) => IE840Message(message)
-      case Some(MessageTypes.IE871) => IE871Message(message)
-      case Some(MessageTypes.IE881) => IE881Message(message)
-      case Some(MessageTypes.IE905) => IE905Message(message)
-      case _ => throw new IEMessageFactoryException(s"Could not create Message object. Unsupported message: $messageType")
+      case Some(MessageTypes.IE704) => IE704Message(message, scope)
+      case Some(MessageTypes.IE801) => IE801Message(message, scope)
+      case Some(MessageTypes.IE802) => IE802Message(message, scope)
+      case Some(MessageTypes.IE803) => IE803Message(message, scope)
+      case Some(MessageTypes.IE807) => IE807Message(message, scope)
+      case Some(MessageTypes.IE810) => IE810Message(message, scope)
+      case Some(MessageTypes.IE813) => IE813Message(message, scope)
+      case Some(MessageTypes.IE818) => IE818Message(message, scope)
+      case Some(MessageTypes.IE819) => IE819Message(message, scope)
+      case Some(MessageTypes.IE829) => IE829Message(message, scope)
+      case Some(MessageTypes.IE837) => IE837Message(message, scope)
+      case Some(MessageTypes.IE839) => IE839Message(message, scope)
+      case Some(MessageTypes.IE840) => IE840Message(message, scope)
+      case Some(MessageTypes.IE871) => IE871Message(message, scope)
+      case Some(MessageTypes.IE881) => IE881Message(message, scope)
+      case Some(MessageTypes.IE905) => IE905Message(message, scope)
+      case _ => throw new RuntimeException(s"[IEMessageFactory] - Could not create Message object. Unsupported message: $messageType")
     }
   }
 

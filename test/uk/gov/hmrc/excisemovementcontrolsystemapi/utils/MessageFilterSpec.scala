@@ -25,6 +25,7 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.fixture.StringSupport
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.MessageTypes
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.eis.EISConsumptionResponse
 import uk.gov.hmrc.excisemovementcontrolsystemapi.repository.model.Message
+import uk.gov.hmrc.excisemovementcontrolsystemapi.services.NewMessageParserService
 
 import java.nio.charset.StandardCharsets
 import java.time.Instant
@@ -37,14 +38,14 @@ class MessageFilterSpec extends PlaySpec
   private val dateTimeService = mock[DateTimeService]
   private val emcsUtils = new EmcsUtils
   private val messageFactory = new IEMessageFactory
+  private val newMessageParserService = new NewMessageParserService(messageFactory, emcsUtils)
+  private val messageFilter = new MessageFilter(dateTimeService, emcsUtils, newMessageParserService)
 
   private val timestamp = Instant.parse("2018-11-30T18:35:24.001234Z")
   when(dateTimeService.timestamp()).thenReturn(timestamp)
 
   "filter" should {
     "filter a message by LRN when multiple LRNs are in the NewMessagesXml" in {
-
-      val messageFilter = new MessageFilter(dateTimeService, emcsUtils = emcsUtils, factory = messageFactory)
 
       val xml = scala.xml.XML.loadString(newMessageWith2IE801sXml.toString())
       val encodeXml = Base64.getEncoder.encodeToString(xml.toString.getBytes(StandardCharsets.UTF_8))
@@ -62,8 +63,6 @@ class MessageFilterSpec extends PlaySpec
 
     "filter when no matching messages for lrn" in {
 
-      val messageFilter = new MessageFilter(dateTimeService, emcsUtils = emcsUtils, factory = messageFactory)
-
       val xml = scala.xml.XML.loadString(newMessageWith2IE801sXml.toString())
       val encodeXml = Base64.getEncoder.encodeToString(xml.toString.getBytes(StandardCharsets.UTF_8))
 
@@ -76,8 +75,6 @@ class MessageFilterSpec extends PlaySpec
     }
 
     "return nothing when no messages returned from eis" in {
-
-      val messageFilter = new MessageFilter(dateTimeService, emcsUtils = emcsUtils, factory = messageFactory)
 
       val xml = scala.xml.XML.loadString(emptyNewMessageDataXml.toString())
       val encodeXml = Base64.getEncoder.encodeToString(xml.toString.getBytes(StandardCharsets.UTF_8))

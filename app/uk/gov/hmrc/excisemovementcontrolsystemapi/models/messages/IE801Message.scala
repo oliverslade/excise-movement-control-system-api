@@ -24,13 +24,13 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType.MovementGenerated
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats.GeneratedJsonWriters
 
-import scala.xml.NodeSeq
+import scala.xml.{NamespaceBinding, TopScope}
 
 case class IE801Message
 (
   private val obj: IE801Type,
   private val key: Option[String],
-  private val namespace: Option[String],
+  private val scope: NamespaceBinding,
   auditType: AuditType
 ) extends IEMessage with GeneratedJsonWriters {
   def localReferenceNumber: Option[String] = {
@@ -48,9 +48,8 @@ case class IE801Message
 
   override def messageType: String = MessageTypes.IE801.value
 
-  override def toXml: NodeSeq = {
-    scalaxb.toXML[IE801Type](obj, namespace, key, generated.defaultScope)
-  }
+  override def toXml: NodeSeq =
+     scalaxb.toXML[IE801Type](obj, key.getOrElse(messageType), scope)
 
   override def toJson: JsValue = Json.toJson(obj)
 
@@ -63,12 +62,12 @@ case class IE801Message
 }
 
 object IE801Message {
-  def apply(message: DataRecord[MessagesOption]): IE801Message = {
-    IE801Message(message.as[IE801Type], message.key, message.namespace, MovementGenerated)
+  def apply(message: DataRecord[MessagesOption], scope: NamespaceBinding): IE801Message = {
+    IE801Message(message.as[IE801Type], message.key, scope, MovementGenerated)
   }
 
   def createFromXml(xml: NodeSeq): IE801Message = {
     val ie801: IE801Type = scalaxb.fromXML[IE801Type](xml)
-    IE801Message(ie801, Some(ie801.productPrefix), None, MovementGenerated)
+    IE801Message(ie801, Some(ie801.productPrefix), TopScope, MovementGenerated)
   }
 }

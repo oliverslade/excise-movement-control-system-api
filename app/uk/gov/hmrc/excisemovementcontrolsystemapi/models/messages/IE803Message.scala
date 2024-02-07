@@ -24,13 +24,13 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType.NotificationOfDivertedMovement
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats.GeneratedJsonWriters
 
-import scala.xml.NodeSeq
+import scala.xml.{NamespaceBinding, TopScope}
 
 case class IE803Message
 (
   private val obj: IE803Type,
   private val key: Option[String],
-  private val namespace: Option[String],
+  private val scope: NamespaceBinding,
   auditType: AuditType
 ) extends IEMessage with GeneratedJsonWriters {
 
@@ -40,7 +40,7 @@ case class IE803Message
     Seq(Some(obj.Body.NotificationOfDivertedEADESAD.ExciseNotification.AdministrativeReferenceCode))
 
   override def toXml: NodeSeq = {
-    scalaxb.toXML[IE803Type](obj, namespace, key, generated.defaultScope)
+    scalaxb.toXML[IE803Type](obj, key.getOrElse(messageType), scope)
   }
 
   override def toJson: JsValue = Json.toJson(obj)
@@ -56,12 +56,12 @@ case class IE803Message
 }
 
 object IE803Message {
-  def apply(message: DataRecord[MessagesOption]): IE803Message = {
-    IE803Message(message.as[IE803Type], message.key, message.namespace, NotificationOfDivertedMovement)
+  def apply(message: DataRecord[MessagesOption], scope: NamespaceBinding): IE803Message = {
+    IE803Message(message.as[IE803Type], message.key, scope, NotificationOfDivertedMovement)
   }
 
   def createFromXml(xml: NodeSeq): IE803Message = {
     val ie803: IE803Type = scalaxb.fromXML[IE803Type](xml)
-    IE803Message(ie803, Some(ie803.productPrefix), None, NotificationOfDivertedMovement)
+    IE803Message(ie803, Some(ie803.productPrefix), TopScope, NotificationOfDivertedMovement)
   }
 }

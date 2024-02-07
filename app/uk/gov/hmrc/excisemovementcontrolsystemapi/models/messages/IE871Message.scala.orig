@@ -17,22 +17,22 @@
 package uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages
 
 import generated.{IE871Type, MessagesOption}
-import play.api.libs.json.{JsValue, Json}
 import scalaxb.DataRecord
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.MessageTypes
-import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
-import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType.ShortageOrExcess
-import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats.GeneratedJsonWriters
 
-import scala.xml.{NamespaceBinding, TopScope}
+import scala.xml.{NamespaceBinding, NodeSeq, TopScope}
 
 case class IE871Message(
                          private val obj: IE871Type,
                          private val key: Option[String],
-                         private val scope: NamespaceBinding,
-                         auditType: AuditType
-                       ) extends IEMessage with SubmitterTypeConverter with GeneratedJsonWriters{
+<<<<<<< HEAD
+                         private val namespace: Option[String]
+                       ) extends IEMessage with SubmitterTypeConverter {
   def submitter: ExciseTraderType = convertSubmitterType(obj.Body.ExplanationOnReasonForShortage.AttributesValue.SubmitterType)
+=======
+                         private val scope: NamespaceBinding
+                       ) extends IEMessage {
+>>>>>>> 3fe5991 (getting specific scope for the xml)
   def localReferenceNumber: Option[String] = None
 
   def consignorId: Option[String] = Some(obj.Body.ExplanationOnReasonForShortage.ConsignorTrader.map(_.TraderExciseNumber)).flatten
@@ -48,23 +48,18 @@ case class IE871Message(
     scalaxb.toXML[IE871Type](obj, key.getOrElse(messageType), scope)
   }
 
-  override def toJson: JsValue = Json.toJson(obj)
-
   override def lrnEquals(lrn: String): Boolean = false
 
   override def messageIdentifier: String = obj.Header.MessageIdentifier
-
-  override def toString: String = s"Message type: $messageType, message identifier: $messageIdentifier, ARC: $administrativeReferenceCode"
-
 }
 
 object IE871Message {
   def apply(message: DataRecord[MessagesOption], scope: NamespaceBinding): IE871Message = {
-    IE871Message(message.as[IE871Type], message.key, scope, ShortageOrExcess)
+    IE871Message(message.as[IE871Type], message.key, scope)
   }
 
   def createFromXml(xml: NodeSeq): IE871Message = {
     val ie871: IE871Type = scalaxb.fromXML[IE871Type](xml)
-    IE871Message(ie871, Some(ie871.productPrefix), TopScope, ShortageOrExcess)
+    IE871Message(ie871, Some(ie871.productPrefix), TopScope)
   }
 }

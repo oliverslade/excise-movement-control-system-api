@@ -26,6 +26,8 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.data.TestXml
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.MessageTypes
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages._
 
+import scala.xml.TopScope
+
 class IEMessageFactorySpec
   extends PlaySpec
     with TestXml
@@ -47,76 +49,76 @@ class IEMessageFactorySpec
       "cannot handle message type" in {
         when(message.key).thenReturn(Some("Anything"))
         intercept[IEMessageFactoryException] {
-          sut.createIEMessage(message)
+          sut.createIEMessage(message, TopScope)
         }.getMessage mustBe s"Could not create Message object. Unsupported message: Anything"
       }
 
       "messageType is empty" in {
         when(message.key).thenReturn(None)
         intercept[IEMessageFactoryException] {
-          sut.createIEMessage(message)
+          sut.createIEMessage(message, TopScope)
         }.getMessage mustBe "Could not create Message object. Message type is empty"
       }
     }
 
     "return an instance of IE704Message" in {
       when(message.key).thenReturn(Some("IE704"))
-      sut.createIEMessage(message).isInstanceOf[IE704Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE704Message] mustBe true
     }
 
     "return an instance of IE801Message" in {
       when(message.key).thenReturn(Some("IE801"))
-      sut.createIEMessage(message).isInstanceOf[IE801Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE801Message] mustBe true
     }
 
     "return an instance of IE802Message" in {
       when(message.key).thenReturn(Some("IE802"))
-      sut.createIEMessage(message).isInstanceOf[IE802Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE802Message] mustBe true
     }
 
     "return an instance of IE803Message" in {
       when(message.key).thenReturn(Some("IE803"))
-      sut.createIEMessage(message).isInstanceOf[IE803Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE803Message] mustBe true
     }
 
     "return an instance of IE807Message" in {
       when(message.key).thenReturn(Some("IE807"))
-      sut.createIEMessage(message).isInstanceOf[IE807Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE807Message] mustBe true
     }
 
     "return an instance of IE810Message" in {
       when(message.key).thenReturn(Some("IE810"))
-      sut.createIEMessage(message).isInstanceOf[IE810Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE810Message] mustBe true
     }
 
     "return an instance of IE813Message" in {
       when(message.key).thenReturn(Some("IE813"))
-      sut.createIEMessage(message).isInstanceOf[IE813Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE813Message] mustBe true
     }
 
     "return an instance of IE818Message" in {
       when(message.key).thenReturn(Some("IE818"))
-      sut.createIEMessage(message).isInstanceOf[IE818Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE818Message] mustBe true
     }
 
     "return an instance of IE819Message" in {
       when(message.key).thenReturn(Some("IE819"))
-      sut.createIEMessage(message).isInstanceOf[IE819Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE819Message] mustBe true
     }
 
     "return an instance of IE837Message" in {
       when(message.key).thenReturn(Some("IE837"))
-      sut.createIEMessage(message).isInstanceOf[IE837Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE837Message] mustBe true
     }
 
     "return an instance of IE840Message" in {
       when(message.key).thenReturn(Some("IE840"))
-      sut.createIEMessage(message).isInstanceOf[IE840Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE840Message] mustBe true
     }
 
     "return an instance of IE871Message" in {
       when(message.key).thenReturn(Some("IE871"))
-      sut.createIEMessage(message).isInstanceOf[IE871Message] mustBe true
+      sut.createIEMessage(message, TopScope).isInstanceOf[IE871Message] mustBe true
     }
 
   }

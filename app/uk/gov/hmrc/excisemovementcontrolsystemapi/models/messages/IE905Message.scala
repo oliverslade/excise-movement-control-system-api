@@ -24,12 +24,12 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType.StatusResponse
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats.GeneratedJsonWriters
 
-import scala.xml.NodeSeq
+import scala.xml.{NamespaceBinding, TopScope}
 
 case class IE905Message(
                          private val obj: IE905Type,
                          private val key: Option[String],
-                         private val namespace: Option[String],
+                         private val scope: NamespaceBinding,
                          auditType: AuditType
                        ) extends IEMessage with GeneratedJsonWriters{
 
@@ -41,7 +41,7 @@ case class IE905Message(
   override def messageType: String = MessageTypes.IE905.value
 
   override def toXml: NodeSeq = {
-    scalaxb.toXML[IE905Type](obj, namespace, key, generated.defaultScope)
+    scalaxb.toXML[IE905Type](obj, key.getOrElse(messageType), scope)
   }
 
   override def toJson: JsValue = Json.toJson(obj)
@@ -55,12 +55,12 @@ case class IE905Message(
 }
 
 object IE905Message {
-  def apply(message: DataRecord[MessagesOption]): IE905Message = {
-    IE905Message(message.as[IE905Type], message.key, message.namespace, StatusResponse)
+  def apply(message: DataRecord[MessagesOption], scope: NamespaceBinding): IE905Message = {
+    IE905Message(message.as[IE905Type], message.key, scope, StatusResponse)
   }
 
   def createFromXml(xml: NodeSeq): IE905Message = {
     val ie905: IE905Type = scalaxb.fromXML[IE905Type](xml)
-    IE905Message(ie905, Some(ie905.productPrefix), None, StatusResponse)
+    IE905Message(ie905, Some(ie905.productPrefix), TopScope, StatusResponse)
   }
 }

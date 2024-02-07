@@ -24,14 +24,14 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType.NotificationOfAcceptedExport
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats.GeneratedJsonWriters
 
-import scala.xml.NodeSeq
+import scala.xml.{NamespaceBinding, TopScope}
 
 
 case class IE829Message
 (
   private val obj: IE829Type,
   private val key: Option[String],
-  private val namespace: Option[String],
+  private val scope: NamespaceBinding,
   auditType: AuditType
 ) extends IEMessage with GeneratedJsonWriters {
 
@@ -45,7 +45,7 @@ case class IE829Message
   override def messageType: String = MessageTypes.IE829.value
 
   override def toXml: NodeSeq = {
-    scalaxb.toXML[IE829Type](obj, namespace, key, generated.defaultScope)
+    scalaxb.toXML[IE829Type](obj, key.getOrElse(messageType), scope)
   }
 
   override def toJson: JsValue = Json.toJson(obj)
@@ -59,12 +59,12 @@ case class IE829Message
 }
 
 object IE829Message {
-  def apply(message: DataRecord[MessagesOption]): IE829Message = {
-    IE829Message(message.as[IE829Type], message.key, message.namespace, NotificationOfAcceptedExport)
+  def apply(message: DataRecord[MessagesOption], scope: NamespaceBinding): IE829Message = {
+    IE829Message(message.as[IE829Type], message.key, scope, NotificationOfAcceptedExport)
   }
 
   def createFromXml(xml: NodeSeq): IE829Message = {
     val ie829: IE829Type = scalaxb.fromXML[IE829Type](xml)
-    IE829Message(ie829, Some(ie829.productPrefix), None, NotificationOfAcceptedExport)
+    IE829Message(ie829, Some(ie829.productPrefix), TopScope, NotificationOfAcceptedExport)
   }
 }

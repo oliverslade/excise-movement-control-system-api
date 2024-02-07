@@ -19,15 +19,16 @@ package uk.gov.hmrc.excisemovementcontrolsystemapi.services
 import generated.NewMessagesDataResponse
 import uk.gov.hmrc.excisemovementcontrolsystemapi.factories.IEMessageFactory
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.IEMessage
-import uk.gov.hmrc.excisemovementcontrolsystemapi.utils.EmcsUtils
+import uk.gov.hmrc.excisemovementcontrolsystemapi.utils.{EmcsUtils, XmlScope}
 
 import javax.inject.Inject
+import scala.xml.NamespaceBinding
 
 class NewMessageParserService @Inject()
 (
   factory: IEMessageFactory,
   emcsUtils: EmcsUtils
-) {
+) extends XmlScope {
 
 
   def countOfMessagesAvailable(encodedMessage: String): Long = {
@@ -38,12 +39,16 @@ class NewMessageParserService @Inject()
   def extractMessages(encodedMessage: String): Seq[IEMessage] = {
     val decodedMessage: String = emcsUtils.decode(encodedMessage)
 
-    getNewMessageDataResponse(decodedMessage)
-      .Messages.messagesoption.map(factory.createIEMessage(_))
+    getNewMessageDataResponse(decodedMessage) match {
+      case (message, scope) => message.Messages.messagesoption.map(factory.createIEMessage(_, scope))
+    }
+
   }
 
-  private def getNewMessageDataResponse(decodedMessage: String) = {
-    scalaxb.fromXML[NewMessagesDataResponse](scala.xml.XML.loadString(decodedMessage))
+  private def getNewMessageDataResponse(decodedMessage: String): (NewMessagesDataResponse, NamespaceBinding) = {
+    val xml = scala.xml.XML.loadString(decodedMessage)
+
+    (scalaxb.fromXML[NewMessagesDataResponse](xml), createScopeFromXml(xml, "NewMessagesDataResponse"))
   }
 }
 
