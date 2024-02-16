@@ -614,6 +614,96 @@ paths:
         - userRestricted:
             - excise-movement-control-system
 
+  /customs/excise/movements/{movementId}/message/{messageId}:
+    get:
+      tags:
+        - Movements
+      summary: Get a message for an excise movement using the message ID
+      description: Get a message for a specific excise movement and messageID. </br></br>**Note:** The consignor ID or consignee ID must match an excise reference number (ERN) in the bearer token that you use for API authentication. If it does not, a 403 Forbidden error will be thrown.
+      operationId: getMessage
+      parameters:
+        - $ref: "#/components/parameters/MessageAcceptHeader"
+        - name: movementId
+          in: path
+          description: The movement to get message for
+          required: true
+          schema:
+            type: string
+        - name: messageId
+          in: path
+          description: The message ID for the requested message
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/vnd.hmrc.1.0+xml:
+              example:
+                - <IE801>...</IE801>
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MessageWithType'
+
+        '400':
+          description: Invalid movement Id, invalid updated since format or not allowed to access this movement
+          content:
+            application/vnd.hmrc.1.0+json:
+              schema:
+                $ref: "#/components/schemas/ExciseMovementError"
+              examples:
+                movementIdFormat:
+                  summary: Movement Id not valid
+                  value:
+                    dateTime: '2024-01-17T16:27:41.095827Z'
+                    message: Movement Id format error
+                    debugMessage: Movement Id should be a valid UUID
+
+        '401':
+          description: Consignor or Consignee not authorised. Invalid enrolment parameter.
+          content:
+            text/plain:
+              example:
+                "Invalid affinity group Individual"
+        '403':
+          description: Consignor ID or Consignee ID is not in authorisation bearer token
+          content:
+            text/plain:
+              example:
+                "Could not find ExciseNumber"
+
+        '404':
+          description: Movement with supplied id not found for this ERN
+          content:
+            application/vnd.hmrc.1.0+json:
+              schema:
+                $ref: "#/components/schemas/ExciseMovementError"
+              examples:
+                movementNotFound:
+                  summary: Movement not in database
+                  value:
+                    dateTime: '2024-01-17T16:26:18.062304Z'
+                    message: Movement not found
+                    debugMessage: Movement b6ba6a73-d723-4c9f-b9b7-99e533fb614f is not found
+                movementNotForErn:
+                  summary: Movement not valid for ERN
+                  value:
+                    dateTime: '2024-01-17T16:27:41.095827Z'
+                    message: Movement not found
+                    debugMessage: Movement b6ba6a73-d723-4c9f-b9b7-99e533fb614f is not found within the data for ERNs GBWK002281022
+                messageNotFound:
+                  summary: No message found for the MovementID provided
+                  value:
+                    dateTime: '2024-01-17T16:27:41.095827Z'
+                    message: No message found for the MovementID provided
+                    debugMessage: MessageId avbdghj1n345njlkf4 was not found in the database
+
+      security:
+        - userRestricted:
+            - excise-movement-control-system
+
   /customs/excise/traders/pre-validate:
     post:
       tags:
@@ -754,6 +844,19 @@ components:
         type: string
         enum: [
           "application/vnd.hmrc.1.0+json"
+        ]
+    MessageAcceptHeader:
+      name: Accept
+      in: header
+      description: >-
+        Specifies the response format and the
+        [version](/api-documentation/docs/reference-guide#versioning) of the API
+        to be used.
+      required: true
+      schema:
+        type: string
+        enum: [
+            "application/vnd.hmrc.1.0+xml"
         ]
     ContentTypeHeader:
       name: Content-Type
