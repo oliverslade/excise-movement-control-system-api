@@ -29,6 +29,7 @@ case class IEMessageFactory() {
 
     MessageTypes.withValueOpt(messageType) match {
       case Some(MessageTypes.IE704) => IE704Message(message)
+      case Some(MessageTypes.IE717) => IE717Message(message)
       case Some(MessageTypes.IE801) => IE801Message(message)
       case Some(MessageTypes.IE802) => IE802Message(message)
       case Some(MessageTypes.IE803) => IE803Message(message)
@@ -42,6 +43,7 @@ case class IEMessageFactory() {
       case Some(MessageTypes.IE839) => IE839Message(message)
       case Some(MessageTypes.IE840) => IE840Message(message)
       case Some(MessageTypes.IE871) => IE871Message(message)
+      case Some(MessageTypes.IE880) => IE880Message(message)
       case Some(MessageTypes.IE881) => IE881Message(message)
       case Some(MessageTypes.IE905) => IE905Message(message)
       case _ => throw new RuntimeException(s"[IEMessageFactory] - Could not create Message object. Unsupported message: $messageType")
@@ -51,6 +53,7 @@ case class IEMessageFactory() {
   def createFromXml(messageType: String, xml: NodeSeq): IEMessage = {
     MessageTypes.withValueOpt(messageType) match {
       case Some(MessageTypes.IE704) => IE704Message.createFromXml(xml)
+      case Some(MessageTypes.IE717) => IE717Message.createFromXml(xml)
       case Some(MessageTypes.IE801) => IE801Message.createFromXml(xml)
       case Some(MessageTypes.IE802) => IE802Message.createFromXml(xml)
       case Some(MessageTypes.IE803) => IE803Message.createFromXml(xml)
@@ -65,6 +68,7 @@ case class IEMessageFactory() {
       case Some(MessageTypes.IE839) => IE839Message.createFromXml(xml)
       case Some(MessageTypes.IE840) => IE840Message.createFromXml(xml)
       case Some(MessageTypes.IE871) => IE871Message.createFromXml(xml)
+      case Some(MessageTypes.IE880) => IE880Message.createFromXml(xml)
       case Some(MessageTypes.IE881) => IE881Message.createFromXml(xml)
       case Some(MessageTypes.IE905) => IE905Message.createFromXml(xml)
       case _ => throw new RuntimeException(s"[IEMessageFactory] - Could not create Message object. Unsupported message: $messageType")

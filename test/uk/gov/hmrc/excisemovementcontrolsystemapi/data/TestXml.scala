@@ -83,6 +83,129 @@ trait TestXml {
     </ns1:Body>
   </ns1:IE704>
 
+  lazy val IE717: Elem = <urn:IE717 xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE717:V3.13" xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13">
+    <urn:Header>
+      <urn1:MessageSender>NDEA.XI</urn1:MessageSender>
+      <urn1:MessageRecipient>NDEA.AT</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2023-06-26</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>23:18:33</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>XI0003213</urn1:MessageIdentifier>
+      <urn1:CorrelationIdentifier>bda98048-2d38-41ca-97b4-0bcd5ac564be</urn1:CorrelationIdentifier>
+    </urn:Header>
+    <urn:Body>
+      <urn:ControlReportEnvelope>
+        <urn:Attributes>
+          <urn:ControlReportMessageType>1</urn:ControlReportMessageType>
+          <urn:DateAndTimeOfValidationOfControlReport>2023-06-26T23:20:46</urn:DateAndTimeOfValidationOfControlReport>
+        </urn:Attributes>
+        <urn:HeaderControlReport>
+          <urn:ControlReportReference>XI2023XYT6TGJUL3</urn:ControlReportReference>
+          <urn:ControlOffice language="en">
+            <urn:ReferenceNumberOfControlOffice>GB202332</urn:ReferenceNumberOfControlOffice>
+            <urn:MemberStateCode>GB</urn:MemberStateCode>
+            <urn:ControlOfficeName>Dover Port</urn:ControlOfficeName>
+            <urn:StreetName>Ship Way</urn:StreetName>
+            <urn:StreetNumber>23</urn:StreetNumber>
+            <urn:Postcode>CT17 1XZ</urn:Postcode>
+            <urn:City>Dover</urn:City>
+            <urn:PhoneNumber>0123459839383</urn:PhoneNumber>
+            <urn:EmailAddress>example@example.org</urn:EmailAddress>
+          </urn:ControlOffice>
+        </urn:HeaderControlReport>
+        <urn:ExciseMovement>
+          <urn:AdministrativeReferenceCode>23XI00000000000000331</urn:AdministrativeReferenceCode>
+          <urn:SequenceNumber>1</urn:SequenceNumber>
+        </urn:ExciseMovement>
+        <urn:OtherAccompanyingDocument>
+          <urn:OtherAccompanyingDocumentType>0</urn:OtherAccompanyingDocumentType>
+          <urn:ShortDescriptionOfOtherAccompanyingDocument language="en">Customs documents</urn:ShortDescriptionOfOtherAccompanyingDocument>
+          <urn:OtherAccompanyingDocumentNumber>XI7478484ABC</urn:OtherAccompanyingDocumentNumber>
+          <urn:OtherAccompanyingDocumentDate>2023-06-26</urn:OtherAccompanyingDocumentDate>
+          <urn:MemberStateOfDispatch>XI</urn:MemberStateOfDispatch>
+          <urn:MemberStateOfDestination>AT</urn:MemberStateOfDestination>
+          <urn:PersonInvolvedInMovementTrader language="en">
+            <urn:TraderExciseNumber>XIWK000467015</urn:TraderExciseNumber>
+            <urn:TraderName>Clarkys Eagles</urn:TraderName>
+            <urn:TraderPersonType>1</urn:TraderPersonType>
+            <urn:StreetName>Happy Street</urn:StreetName>
+            <urn:Postcode>ZZ1 1BG</urn:Postcode>
+            <urn:City>The City</urn:City>
+          </urn:PersonInvolvedInMovementTrader>
+          <urn:PersonInvolvedInMovementTrader language="en">
+            <urn:TraderExciseNumber>GBWK000602056</urn:TraderExciseNumber>
+            <urn:TraderName>LUCY'S GIN STORE</urn:TraderName>
+            <urn:TraderPersonType>2</urn:TraderPersonType>
+            <urn:StreetName>The Road</urn:StreetName>
+            <urn:Postcode>MC234</urn:Postcode>
+            <urn:City>Happy Town</urn:City>
+          </urn:PersonInvolvedInMovementTrader>
+          <urn:GoodsItem>
+            <urn:DescriptionOfTheGoods>Gin</urn:DescriptionOfTheGoods>
+            <urn:CnCode>27101231</urn:CnCode>
+            <urn:CommercialDescriptionOfTheGoods>Gin</urn:CommercialDescriptionOfTheGoods>
+            <urn:Quantity>100.000</urn:Quantity>
+            <urn:GrossMass>100.00</urn:GrossMass>
+            <urn:NetMass>90.00</urn:NetMass>
+          </urn:GoodsItem>
+        </urn:OtherAccompanyingDocument>
+        <urn:ControlReport>
+          <urn:DateOfControl>2023-06-26</urn:DateOfControl>
+          <urn:PlaceOfControl language="en">Dover Port</urn:PlaceOfControl>
+          <urn:ControlType>1</urn:ControlType>
+          <urn:ReasonForControl>1</urn:ReasonForControl>
+          <urn:ComplementaryOriginReference language="en">XIfh4833383l2023</urn:ComplementaryOriginReference>
+          <urn:ControlOfficerIdentity language="en">Steve</urn:ControlOfficerIdentity>
+          <urn:GlobalControlConclusion>3</urn:GlobalControlConclusion>
+          <urn:ControlAtArrivalRequired>1</urn:ControlAtArrivalRequired>
+          <urn:Flag>0</urn:Flag>
+          <urn:Comments language="en">Goods are bad. Need to seize them :(</urn:Comments>
+          <!--1 to 99 repetitions:-->
+          <urn:PerformedControlAction>
+            <urn:PerformedControlAction>9</urn:PerformedControlAction>
+            <urn:OtherControlAction language="to">token</urn:OtherControlAction>
+          </urn:PerformedControlAction>
+          <urn:PerformedControlAction>
+            <urn:PerformedControlAction>3</urn:PerformedControlAction>
+            <urn:OtherControlAction language="to">token</urn:OtherControlAction>
+          </urn:PerformedControlAction>
+          <urn:PerformedControlAction>
+            <urn:PerformedControlAction>0</urn:PerformedControlAction>
+            <urn:OtherControlAction language="en">Tested it a bit</urn:OtherControlAction>
+          </urn:PerformedControlAction>
+          <urn:SupportingEvidence>
+            <urn:IssuingAuthority language="en">Border Agency</urn:IssuingAuthority>
+            <urn:EvidenceTypeCode>01</urn:EvidenceTypeCode>
+            <urn:ReferenceOfEvidence language="en">Over here</urn:ReferenceOfEvidence>
+            <urn:ImageOfEvidence>YmVsbGE=</urn:ImageOfEvidence>
+          </urn:SupportingEvidence>
+          <urn:UnsatisfactoryReason>
+            <urn:UnsatisfactoryReasonCode>2</urn:UnsatisfactoryReasonCode>
+            <urn:ComplementaryInformation language="en">Not good</urn:ComplementaryInformation>
+          </urn:UnsatisfactoryReason>
+          <urn:TransportDetails>
+            <urn:TransportUnitCode>1</urn:TransportUnitCode>
+            <urn:IdentityOfTransportUnits>Train</urn:IdentityOfTransportUnits>
+            <urn:CommercialSealIdentification>AZnrj4jff</urn:CommercialSealIdentification>
+            <urn:SealInformation language="en">Piece of paper</urn:SealInformation>
+            <urn:ComplementaryInformation language="en">Pretty nice seal!</urn:ComplementaryInformation>
+          </urn:TransportDetails>
+          <urn:BodyControlReport>
+            <urn:BodyRecordUniqueReference>101</urn:BodyRecordUniqueReference>
+            <urn:DescriptionOfTheGoods>Gin</urn:DescriptionOfTheGoods>
+            <urn:CnCode>84866332</urn:CnCode>
+            <urn:AdditionalCode>NH22</urn:AdditionalCode>
+            <urn:Comments language="en">Had to investigate this shipment</urn:Comments>
+            <urn:UnsatisfactoryReason>
+              <urn:UnsatisfactoryReasonCode>1</urn:UnsatisfactoryReasonCode>
+              <urn:ComplementaryInformation language="en">Not good</urn:ComplementaryInformation>
+            </urn:UnsatisfactoryReason>
+          </urn:BodyControlReport>
+        </urn:ControlReport>
+      </urn:ControlReportEnvelope>
+    </urn:Body>
+  </urn:IE717>
+
+
   lazy val IE801: Elem =
     <urn:IE801
     xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE801:V3.13"
@@ -1080,6 +1203,41 @@ trait TestXml {
     </urn:IE871>
 
   }
+
+  lazy val IE880: Elem = <urn7:IE880 xmlns:urn7="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE880:V3.13" xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13">
+    <urn7:Header>
+      <urn:MessageSender>NDEA.GB</urn:MessageSender>
+      <urn:MessageRecipient>NDEA.XI</urn:MessageRecipient>
+      <urn:DateOfPreparation>2023-06-30</urn:DateOfPreparation>
+      <urn:TimeOfPreparation>21:18:33</urn:TimeOfPreparation>
+      <urn:MessageIdentifier>XI00432X</urn:MessageIdentifier>
+      <urn:CorrelationIdentifier>6dddas1231ff3111f3234</urn:CorrelationIdentifier>
+    </urn7:Header>
+    <urn7:Body>
+      <urn7:ManualClosureRequest>
+        <urn7:Attributes>
+          <urn7:AdministrativeReferenceCode>23XI00000000000056349</urn7:AdministrativeReferenceCode>
+          <urn7:SequenceNumber>1</urn7:SequenceNumber>
+          <urn7:ManualClosureRequestReasonCode>1</urn7:ManualClosureRequestReasonCode>
+          <urn7:ManualClosureRequestReasonCodeComplement language="en">Nice try</urn7:ManualClosureRequestReasonCodeComplement>
+        </urn7:Attributes>
+        <urn7:SupportingDocuments>
+          <urn7:SupportingDocumentDescription language="en">XI8466333A</urn7:SupportingDocumentDescription>
+          <urn7:ReferenceOfSupportingDocument language="en">Closure request</urn7:ReferenceOfSupportingDocument>
+          <urn7:ImageOfDocument>Y2lyY3VzZXM=</urn7:ImageOfDocument>
+          <urn7:SupportingDocumentType>pdf</urn7:SupportingDocumentType>
+        </urn7:SupportingDocuments>
+        <urn7:BodyManualClosure>
+          <urn7:BodyRecordUniqueReference>11</urn7:BodyRecordUniqueReference>
+          <urn7:IndicatorOfShortageOrExcess>S</urn7:IndicatorOfShortageOrExcess>
+          <urn7:ObservedShortageOrExcess>1000</urn7:ObservedShortageOrExcess>
+          <urn7:ExciseProductCode>W200</urn7:ExciseProductCode>
+          <urn7:RefusedQuantity>1000</urn7:RefusedQuantity>
+          <urn7:ComplementaryInformation language="en">Not supplied goods promised</urn7:ComplementaryInformation>
+        </urn7:BodyManualClosure>
+      </urn7:ManualClosureRequest>
+    </urn7:Body>
+  </urn7:IE880>
 
   lazy val IE881: Elem =
     <urn5:IE881 xmlns:urn5="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE881:V3.13"

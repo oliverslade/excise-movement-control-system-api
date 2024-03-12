@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats
 
-import generated._
+import generated.{ControlReportMessageType, ReasonForControl, _}
 import play.api.libs.json.{Format, JsError, JsObject, JsString, JsSuccess, Json, OWrites, Reads, Writes}
 import scalaxb.{DataRecord, DataTypeFactory}
 
@@ -95,8 +95,19 @@ trait GeneratedJsonWriters {
   implicit val ImportSadTypeType: OWrites[ImportSadTypeType] = Json.writes[ImportSadTypeType]
   implicit val LSDSealInformationTypeType5: OWrites[LSDSealInformationTypeType5] = Json.writes[LSDSealInformationTypeType5]
 
-  //IE815 Reordered
+  implicit val OtherAccompanyingDocumentType: Writes[OtherAccompanyingDocumentType] = Writes[OtherAccompanyingDocumentType] {
+    t => JsString(t.toString)
+  }
 
+  implicit val TraderPersonType: Writes[TraderPersonType] = Writes[TraderPersonType] {
+    t => JsString(t.toString)
+  }
+
+  implicit val IndicatorOfShortageOrExcess: Writes[IndicatorOfShortageOrExcess] = Writes[IndicatorOfShortageOrExcess] {
+    i => JsString(i.toString)
+  }
+
+  //IE815 Reordered
   implicit val ComplementConsigneeTraderTypeType: OWrites[ComplementConsigneeTraderTypeType] = Json.writes[ComplementConsigneeTraderTypeType]
   implicit val DispatchImportOfficeTypeType: OWrites[DispatchImportOfficeTypeType] = Json.writes[DispatchImportOfficeTypeType]
   implicit val LSDDocumentDescriptionTypeType: OWrites[LSDDocumentDescriptionTypeType] = Json.writes[LSDDocumentDescriptionTypeType]
@@ -141,6 +152,59 @@ trait GeneratedJsonWriters {
   implicit val GenericRefusalMessageType: OWrites[GenericRefusalMessageType] = Json.writes[GenericRefusalMessageType]
   implicit val BodyTypeType10: OWrites[BodyTypeType10] = Json.writes[BodyTypeType10]
   implicit val IE704Type: OWrites[IE704Type] = Json.writes[IE704Type]
+
+  //IE717
+  implicit val LSDComplementaryInformationTypeType7: OWrites[LSDComplementaryInformationTypeType7] = Json.writes[LSDComplementaryInformationTypeType7]
+
+  implicit val UnsatisfactoryReasonTypeType: OWrites[UnsatisfactoryReasonTypeType] = Json.writes[UnsatisfactoryReasonTypeType]
+  implicit val LSDCommentsTypeType: OWrites[LSDCommentsTypeType] = Json.writes[LSDCommentsTypeType]
+  implicit val BodyControlReportType: OWrites[BodyControlReportType] = Json.writes[BodyControlReportType]
+
+  implicit val LSDSealInformationTypeType3: OWrites[LSDSealInformationTypeType3] = Json.writes[LSDSealInformationTypeType3]
+  implicit val TransportDetailsTypeType3: OWrites[TransportDetailsTypeType3] = Json.writes[TransportDetailsTypeType3]
+
+  implicit val LSDReferenceOfEvidenceTypeType: OWrites[LSDReferenceOfEvidenceTypeType] = Json.writes[LSDReferenceOfEvidenceTypeType]
+  implicit val LSDEvidenceTypeComplementTypeType: OWrites[LSDEvidenceTypeComplementTypeType] = Json.writes[LSDEvidenceTypeComplementTypeType]
+  implicit val LSDIssuingAuthorityTypeType: OWrites[LSDIssuingAuthorityTypeType] = Json.writes[LSDIssuingAuthorityTypeType]
+  implicit val SupportingEvidenceType: OWrites[SupportingEvidenceType] = Json.writes[SupportingEvidenceType]
+
+  implicit val LSDOtherControlActionType: OWrites[LSDOtherControlActionType] = Json.writes[LSDOtherControlActionType]
+  implicit val PerformedControlAction: Writes[PerformedControlAction] = Writes[PerformedControlAction] {
+    t => JsString(t.toString)
+  }
+  implicit val PerformedControlActionType: OWrites[PerformedControlActionType] = Json.writes[PerformedControlActionType]
+  implicit val GlobalControlConclusion: Writes[GlobalControlConclusion] = Writes[GlobalControlConclusion] {
+    t => JsString(t.toString)
+  }
+  implicit val LSDControlOfficerIdentityType: OWrites[LSDControlOfficerIdentityType] = Json.writes[LSDControlOfficerIdentityType]
+  implicit val LSDComplementaryOriginReferenceType: OWrites[LSDComplementaryOriginReferenceType] = Json.writes[LSDComplementaryOriginReferenceType]
+  implicit val ReasonForControl: Writes[ReasonForControl] = Writes[ReasonForControl] {
+    t => JsString(t.toString)
+  }
+  implicit val ControlType: Writes[ControlType] = Writes[ControlType] {
+    t => JsString(t.toString)
+  }
+  implicit val LSDPlaceOfControlType: OWrites[LSDPlaceOfControlType] = Json.writes[LSDPlaceOfControlType]
+
+  implicit val LSDAcoComplementaryInformationTypeType: OWrites[LSDAcoComplementaryInformationTypeType] = Json.writes[LSDAcoComplementaryInformationTypeType]
+  implicit val MeansOfTransportTypeType: OWrites[MeansOfTransportTypeType] = Json.writes[MeansOfTransportTypeType]
+  implicit val GoodsItemTypeType: OWrites[GoodsItemTypeType] = Json.writes[GoodsItemTypeType]
+  implicit val PersonInvolvedInMovementTraderTypeType: OWrites[PersonInvolvedInMovementTraderTypeType] = Json.writes[PersonInvolvedInMovementTraderTypeType]
+  implicit val LSDShortDescriptionOfOtherAccompanyingDocumentTypeType: OWrites[LSDShortDescriptionOfOtherAccompanyingDocumentTypeType] = Json.writes[LSDShortDescriptionOfOtherAccompanyingDocumentTypeType]
+  implicit val ControlOfficeType: OWrites[ControlOfficeType] = Json.writes[ControlOfficeType]
+  implicit val ControlReportMessageType: Writes[ControlReportMessageType] = Writes[ControlReportMessageType] {
+    t => JsString(t.toString)
+  }
+
+  implicit val ControlReportType: OWrites[ControlReportType] = Json.writes[ControlReportType]
+  implicit val OtherAccompanyingDocumentTypeType2: OWrites[OtherAccompanyingDocumentTypeType2] = Json.writes[OtherAccompanyingDocumentTypeType2]
+  implicit val ExciseMovementTypeType4: OWrites[ExciseMovementTypeType4] = Json.writes[ExciseMovementTypeType4]
+  implicit val HeaderControlReportType: OWrites[HeaderControlReportType] = Json.writes[HeaderControlReportType]
+  implicit val AttributesTypeType8: OWrites[AttributesTypeType8] = Json.writes[AttributesTypeType8]
+
+  implicit val ControlReportEnvelopeType: OWrites[ControlReportEnvelopeType] = Json.writes[ControlReportEnvelopeType]
+  implicit val BodyTypeType9: OWrites[BodyTypeType9] = Json.writes[BodyTypeType9]
+  implicit val IE717Type: OWrites[IE717Type] = Json.writes[IE717Type]
 
   //IE801
 
@@ -249,9 +313,6 @@ trait GeneratedJsonWriters {
 
   implicit val LSDComplementaryInformationTypeType4: OWrites[LSDComplementaryInformationTypeType4] = Json.writes[LSDComplementaryInformationTypeType4]
   implicit val UnsatisfactoryReasonType: OWrites[UnsatisfactoryReasonType] = Json.writes[UnsatisfactoryReasonType]
-  implicit val IndicatorOfShortageOrExcess: Writes[IndicatorOfShortageOrExcess] = Writes[IndicatorOfShortageOrExcess] {
-    i => JsString(i.toString)
-  }
   implicit val GlobalConclusionOfReceipt: Writes[GlobalConclusionOfReceipt] = Writes[GlobalConclusionOfReceipt] {
     r => JsString(r.toString)
   }
@@ -342,16 +403,11 @@ trait GeneratedJsonWriters {
   implicit val LSDSubmittingPersonComplementType: OWrites[LSDSubmittingPersonComplementType] = Json.writes[LSDSubmittingPersonComplementType]
   implicit val LSDPlaceOfEventType: OWrites[LSDPlaceOfEventType] = Json.writes[LSDPlaceOfEventType]
   implicit val LSDAcoComplementaryInformationType: OWrites[LSDAcoComplementaryInformationType] = Json.writes[LSDAcoComplementaryInformationType]
-  implicit val TraderPersonType: Writes[TraderPersonType] = Writes[TraderPersonType] {
-    t => JsString(t.toString)
-  }
   implicit val MeansOfTransportType: OWrites[MeansOfTransportType] = Json.writes[MeansOfTransportType]
   implicit val GoodsItemType: OWrites[GoodsItemType] = Json.writes[GoodsItemType]
   implicit val PersonInvolvedInMovementTraderType: OWrites[PersonInvolvedInMovementTraderType] = Json.writes[PersonInvolvedInMovementTraderType]
   implicit val LSDShortDescriptionOfOtherAccompanyingDocumentType: OWrites[LSDShortDescriptionOfOtherAccompanyingDocumentType] = Json.writes[LSDShortDescriptionOfOtherAccompanyingDocumentType]
-  implicit val OtherAccompanyingDocumentType: Writes[OtherAccompanyingDocumentType] = Writes[OtherAccompanyingDocumentType] {
-    t => JsString(t.toString)
-  }
+
   implicit val ReportMessageType: Writes[ReportMessageType] = Writes[ReportMessageType] {
     t => JsString(t.toString)
   }
@@ -382,6 +438,18 @@ trait GeneratedJsonWriters {
   implicit val ExplanationOnReasonForShortageType: OWrites[ExplanationOnReasonForShortageType] = Json.writes[ExplanationOnReasonForShortageType]
   implicit val BodyTypeType18: OWrites[BodyTypeType18] = Json.writes[BodyTypeType18]
   implicit val IE871Type: OWrites[IE871Type] = Json.writes[IE871Type]
+
+  //IE880
+  implicit val LSDSupportingDocumentDescriptionType: OWrites[LSDSupportingDocumentDescriptionType] = Json.writes[LSDSupportingDocumentDescriptionType]
+  implicit val LSDReferenceOfSupportingDocumentType: OWrites[LSDReferenceOfSupportingDocumentType] = Json.writes[LSDReferenceOfSupportingDocumentType]
+  implicit val LSDManualClosureRequestReasonCodeComplementType: OWrites[LSDManualClosureRequestReasonCodeComplementType] = Json.writes[LSDManualClosureRequestReasonCodeComplementType]
+  implicit val LSDComplementaryInformationType: OWrites[LSDComplementaryInformationType] = Json.writes[LSDComplementaryInformationType]
+  implicit val BodyManualClosureType: OWrites[BodyManualClosureType] = Json.writes[BodyManualClosureType]
+  implicit val SupportingDocumentsType: OWrites[SupportingDocumentsType] = Json.writes[SupportingDocumentsType]
+  implicit val AttributesTypeType: OWrites[AttributesTypeType] = Json.writes[AttributesTypeType]
+  implicit val ManualClosureRequestType: OWrites[ManualClosureRequestType] = Json.writes[ManualClosureRequestType]
+  implicit val BodyTypeType: OWrites[BodyTypeType] = Json.writes[BodyTypeType]
+  implicit val IE880Type: OWrites[IE880Type] = Json.writes[IE880Type]
 
   //IE881
 

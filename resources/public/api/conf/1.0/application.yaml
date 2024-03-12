@@ -521,7 +521,7 @@ paths:
     get:
       tags:
         - Movements
-      summary: Get all messages for an excise movement using the localReferenceNumber
+      summary: Get all messages for an excise movement using the movementId
       description: Get all messages for a specific excise movement. </br></br>**Note:** The consignor ID or consignee ID must match an excise reference number (ERN) in the bearer token that you use for API authentication. If it does not, a 403 Forbidden error will be thrown.
       operationId: getAllMessages
       parameters:

@@ -37,7 +37,9 @@ object AuditType {
     RefusalByCustoms,
     EventReport,
     ManualClosure,
-    StatusResponse
+    StatusResponse,
+    ControlResponse,
+    ManualClosureRequest
   )
 
   case object CancelMovement                  extends AuditType("CancelMovement")
@@ -57,5 +59,7 @@ object AuditType {
   case object EventReport                     extends AuditType("EventReport")
   case object ManualClosure                   extends AuditType("ManualClosure")
   case object StatusResponse                  extends AuditType("StatusResponse")
+  case object ControlResponse                 extends AuditType("ControlResponse")
+  case object ManualClosureRequest            extends AuditType("ManualClosureRequest")
 
 }

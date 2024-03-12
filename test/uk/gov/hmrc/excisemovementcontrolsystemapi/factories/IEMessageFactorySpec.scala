@@ -64,6 +64,11 @@ class IEMessageFactorySpec
       sut.createIEMessage(message).isInstanceOf[IE704Message] mustBe true
     }
 
+    "return an instance of IE717Message" in {
+      when(message.key).thenReturn(Some("IE717"))
+      sut.createIEMessage(message).isInstanceOf[IE717Message] mustBe true
+    }
+
     "return an instance of IE801Message" in {
       when(message.key).thenReturn(Some("IE801"))
       sut.createIEMessage(message).isInstanceOf[IE801Message] mustBe true
@@ -119,6 +124,21 @@ class IEMessageFactorySpec
       sut.createIEMessage(message).isInstanceOf[IE871Message] mustBe true
     }
 
+    "return an instance of IE880Message" in {
+      when(message.key).thenReturn(Some("IE880"))
+      sut.createIEMessage(message).isInstanceOf[IE880Message] mustBe true
+    }
+
+    "return an instance of IE881Message" in {
+      when(message.key).thenReturn(Some("IE881"))
+      sut.createIEMessage(message).isInstanceOf[IE881Message] mustBe true
+    }
+
+    "return an instance of IE905Message" in {
+      when(message.key).thenReturn(Some("IE905"))
+      sut.createIEMessage(message).isInstanceOf[IE905Message] mustBe true
+    }
+
   }
 
   "createFromType" should {
@@ -144,6 +164,15 @@ class IEMessageFactorySpec
     "return an instance of IE704Message when no arc" in {
       val result = sut.createFromXml("IE704", IE704NoArc).asInstanceOf[IE704Message]
       result.administrativeReferenceCode mustBe Seq(None)
+    }
+
+    "return an instance of IE717Message" in {
+      val result = sut.createFromXml("IE717", IE717).asInstanceOf[IE717Message]
+      result.consigneeId mustBe None
+      result.administrativeReferenceCode mustBe Seq(Some("23XI00000000000000331"))
+      result.messageIdentifier mustBe "XI0003213"
+      result.messageType mustBe MessageTypes.IE717.value
+      result.lrnEquals("lrnie8158976912") mustBe false
     }
 
     "return an instance of IE801Message" in {
@@ -304,6 +333,15 @@ class IEMessageFactorySpec
       result.submitter mustBe Consignee
       result.consignorId mustBe None
       result.consigneeId mustBe Some("GBWK240176600")
+    }
+
+    "return an instance of IE880Message" in {
+      val result = sut.createFromXml("IE880", IE880).asInstanceOf[IE880Message]
+      result.consigneeId mustBe None
+      result.administrativeReferenceCode mustBe Seq(Some("23XI00000000000056349"))
+      result.messageIdentifier mustBe "XI00432X"
+      result.messageType mustBe MessageTypes.IE880.value
+      result.lrnEquals("lrnie8158976912") mustBe false
     }
 
     "return an instance of IE881Message" in {

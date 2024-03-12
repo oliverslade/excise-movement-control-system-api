@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.excisemovementcontrolsystemapi.writes
 
-import generated.{IE704Type, IE801Type, IE802Type, IE803Type, IE807Type, IE810Type, IE813Type, IE815Type, IE818Type, IE819Type, IE829Type, IE837Type, IE839Type, IE840Type, IE871Type, IE881Type, IE905Type, XMLProtocol}
+import generated.{IE704Type, IE717Type, IE801Type, IE802Type, IE803Type, IE807Type, IE810Type, IE813Type, IE815Type, IE818Type, IE819Type, IE829Type, IE837Type, IE839Type, IE840Type, IE871Type, IE880Type, IE881Type, IE905Type, XMLProtocol}
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.must.Matchers
 import uk.gov.hmrc.excisemovementcontrolsystemapi.data.TestXml
@@ -27,6 +27,7 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.writes.testObjects._
 class GeneratedJsonWritersSpec extends AnyFreeSpec with GeneratedJsonWriters with Matchers with TestXml {
 
   "IE704Message" - new TestType[IE704Type](IE704TestMessageType, IE704Message.createFromXml(IE704))
+  "IE717Message" - new TestType[IE717Type](IE717TestMessageType, IE717Message.createFromXml(IE717))
   "IE801Message" - new TestType[IE801Type](IE801TestMessageType, IE801Message.createFromXml(IE801))
   "IE802Message" - new TestType[IE802Type](IE802TestMessageType, IE802Message.createFromXml(IE802))
   "IE803Message" - new TestType[IE803Type](IE803TestMessageType, IE803Message.createFromXml(IE803))
@@ -41,6 +42,7 @@ class GeneratedJsonWritersSpec extends AnyFreeSpec with GeneratedJsonWriters wit
   "IE839Message" - new TestType[IE839Type](IE839TestMessageType, IE839Message.createFromXml(IE839))
   "IE840Message" - new TestType[IE840Type](IE840TestMessageType, IE840Message.createFromXml(IE840))
   "IE871Message" - new TestType[IE871Type](IE871TestMessageType, IE871Message.createFromXml(IE871WithConsignor))
+  "IE880Message" - new TestType[IE880Type](IE880TestMessageType, IE880Message.createFromXml(IE880))
   "IE881Message" - new TestType[IE881Type](IE881TestMessageType, IE881Message.createFromXml(IE881))
   "IE905Message" - new TestType[IE905Type](IE905TestMessageType, IE905Message.createFromXml(IE905))
 

@@ -27,6 +27,7 @@ object MessageTypes extends StringEnum[MessageEnum] with StringPlayJsonValueEnum
   val values: immutable.IndexedSeq[MessageEnum] = findValues
 
   case object IE704 extends MessageEnum("IE704")
+  case object IE717 extends MessageEnum("IE717")
   case object IE801 extends MessageEnum("IE801")
   case object IE802 extends MessageEnum("IE802")
   case object IE803 extends MessageEnum("IE803")
@@ -41,6 +42,7 @@ object MessageTypes extends StringEnum[MessageEnum] with StringPlayJsonValueEnum
   case object IE839 extends MessageEnum("IE839")
   case object IE840 extends MessageEnum("IE840")
   case object IE871 extends MessageEnum("IE871")
+  case object IE880 extends MessageEnum("IE880")
   case object IE881 extends MessageEnum("IE881")
   case object IE905 extends MessageEnum("IE905")
   case object IE_NEW_MESSAGES extends MessageEnum("IENewMessage")
