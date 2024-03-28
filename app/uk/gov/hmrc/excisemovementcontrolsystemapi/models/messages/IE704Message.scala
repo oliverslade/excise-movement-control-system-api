@@ -25,7 +25,7 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType.Refused
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats.GeneratedJsonWriters
 
-import scala.xml.NamespaceBinding
+import scala.xml.{NamespaceBinding, NodeSeq}
 
 case class IE704Message
 (

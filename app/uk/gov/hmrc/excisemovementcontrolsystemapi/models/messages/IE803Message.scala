@@ -24,7 +24,7 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType.NotificationOfDivertedMovement
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats.GeneratedJsonWriters
 
-import scala.xml.{NamespaceBinding, TopScope}
+import scala.xml.{NamespaceBinding, NodeSeq, TopScope}
 
 case class IE803Message
 (

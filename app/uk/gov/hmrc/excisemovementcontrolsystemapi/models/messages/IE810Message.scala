@@ -24,7 +24,7 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType.CancelMovement
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.MessageTypeFormats.GeneratedJsonWriters
 
-import scala.xml.{NamespaceBinding,  TopScope}
+import scala.xml.{NamespaceBinding,  NodeSeq, TopScope}
 
 case class IE810Message(
                          private val obj: IE810Type,
