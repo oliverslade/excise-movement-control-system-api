@@ -33,9 +33,26 @@ trait XmlScope {
   }
 
   /*
+  Todo: review this
+  Mauro
   Extract the scope from the XML message. This go through the XML and collect
   any prefix (e.g urn if <urn:IE801>) and return an unfolded scope for all
   the prefix collected
+
+  Notes: If an XML has two the same messages that use different namespace (e.g the SHowNewMessagesResponse1.xml
+  file in the stubs has two IE818 with different namespace respectively urn3 and urn5)
+  the NamespaceBinding/scope will contains these two binding. e.g:
+
+  <urn3:IE818
+    xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13"
+    xmlns:urn3="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE818:V3.13"
+    xmlns:urn5="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE818:V3.13">
+    ....
+  </urn3:IE818
+
+  this may not be ideal, but it certainly better then before when the message was sontaining
+  all namespace.
+
    */
   private def extractScope(xml: NodeSeq, messageType: String): Seq[(Option[String], String)] = {
     (xml \\ messageType \\ "_").map { o =>
