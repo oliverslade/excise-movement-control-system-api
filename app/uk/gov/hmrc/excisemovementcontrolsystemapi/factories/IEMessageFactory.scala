@@ -25,7 +25,7 @@ import scala.xml.{NamespaceBinding, NodeSeq}
 
 case class IEMessageFactory() {
   def createIEMessage(message: DataRecord[MessagesOption], scope: NamespaceBinding): IEMessage = {
-    val messageType = message.key.getOrElse(throw new RuntimeException("[IEMessageFactory] - Could not create Message object. Message type is empty"))
+    val messageType = message.key.getOrElse(throw new IEMessageFactoryException("Could not create Message object. Message type is empty"))
 
     MessageTypes.withValueOpt(messageType) match {
       case Some(MessageTypes.IE704) => IE704Message(message, scope)
@@ -44,7 +44,7 @@ case class IEMessageFactory() {
       case Some(MessageTypes.IE871) => IE871Message(message, scope)
       case Some(MessageTypes.IE881) => IE881Message(message, scope)
       case Some(MessageTypes.IE905) => IE905Message(message, scope)
-      case _ => throw new RuntimeException(s"[IEMessageFactory] - Could not create Message object. Unsupported message: $messageType")
+      case _ => throw new IEMessageFactoryException(s"Could not create Message object. Unsupported message: $messageType")
     }
   }
 

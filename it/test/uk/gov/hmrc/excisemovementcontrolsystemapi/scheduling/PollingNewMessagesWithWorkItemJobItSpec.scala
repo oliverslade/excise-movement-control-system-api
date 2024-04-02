@@ -50,6 +50,7 @@ import java.time.temporal.ChronoUnit
 import java.util.Base64
 import scala.concurrent.duration.{DAYS, Duration, MINUTES}
 import scala.concurrent.{ExecutionContext, Future}
+import scala.xml.NodeSeq
 
 class PollingNewMessagesWithWorkItemJobItSpec extends PlaySpec
   with DefaultPlayMongoRepositorySupport[WorkItem[ExciseNumberWorkItem]]
@@ -578,7 +579,7 @@ class PollingNewMessagesWithWorkItemJobItSpec extends PlaySpec
           EISConsumptionResponse(
             Instant.parse("2024-01-02T03:04:05Z"),
             "1",
-            Base64.getEncoder.encodeToString(newMessageWith818And802.toString().getBytes(StandardCharsets.UTF_8)),
+            Base64.getEncoder.encodeToString(newMessageWith818And802And802.toString().getBytes(StandardCharsets.UTF_8)),
           )).toString()
         ))
         .willSetStateTo("show-empty-message")
@@ -645,9 +646,10 @@ class PollingNewMessagesWithWorkItemJobItSpec extends PlaySpec
 
   }
 
-  private def createMessage(xml: String, messageType: String): Message = {
+  private def createMessage(xml: NodeSeq, messageType: String): Message = {
     Message(
-      Base64.getEncoder.encodeToString(xml.getBytes(StandardCharsets.UTF_8)),
+      xml.hashCode(),
+      Base64.getEncoder.encodeToString(clean(xml.toString()).getBytes(StandardCharsets.UTF_8)),
       messageType,
       "messageId",
       timestamp

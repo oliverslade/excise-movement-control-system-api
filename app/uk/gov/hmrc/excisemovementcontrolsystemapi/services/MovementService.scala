@@ -152,9 +152,7 @@ class MovementService @Inject()(
                                  ): Future[Either[String,Movement]] = {
 
     val message = Message(
-      encodedMessage = emcsUtils.encode(newMessage.toXml.toString),
-      messageType = newMessage.messageType,
-      messageId = newMessage.messageIdentifier,
+      newMessage,
       createdOn = dateTimeService.timestamp()
     )
 

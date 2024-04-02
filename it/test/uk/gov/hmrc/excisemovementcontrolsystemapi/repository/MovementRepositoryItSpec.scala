@@ -99,7 +99,7 @@ class MovementRepositoryItSpec extends PlaySpec
       insertMovement(movementLRN1)
       insertMovement(movementLRN2)
 
-      val message = Message("any, message", MessageTypes.IE801.value, "messageId", timestamp)
+      val message = Message(123, "any, message", MessageTypes.IE801.value, "messageId", timestamp)
       val updatedMovement = movementLRN2.copy(administrativeReferenceCode = Some("arc"), messages = Seq(message))
       val result = repository.updateMovement(updatedMovement).futureValue
 
@@ -116,7 +116,7 @@ class MovementRepositoryItSpec extends PlaySpec
       insertMovement(movementLRN1)
       insertMovement(movementLRN2)
 
-      val message = Message("any, message", MessageTypes.IE801.value, "messageId", timestamp)
+      val message = Message(123, "any, message", MessageTypes.IE801.value, "messageId", timestamp)
       val updateMovement = movementLRN2.copy(administrativeReferenceCode = Some("arc"), messages = Seq(message))
       val result = repository.updateMovement(updateMovement).futureValue
 
@@ -137,7 +137,7 @@ class MovementRepositoryItSpec extends PlaySpec
       insertMovement(movementLRN1)
       insertMovement(movementLRN2)
 
-      val message = Message("any, message", MessageTypes.IE801.value, "messageId", timestamp)
+      val message = Message(123, "any, message", MessageTypes.IE801.value, "messageId", timestamp)
       val result = repository.updateMovement(Movement(Some("boxId"), "4", "897", Some("321"), Some("arc"), Instant.now, Seq(message))).futureValue
 
       val records = findAll().futureValue

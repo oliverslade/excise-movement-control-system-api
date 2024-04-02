@@ -17,10 +17,13 @@
 package uk.gov.hmrc.excisemovementcontrolsystemapi.repository.model
 
 import play.api.libs.json.{Format, Json, OFormat}
+import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.IEMessage
+import uk.gov.hmrc.excisemovementcontrolsystemapi.utils.EmcsUtils
 import uk.gov.hmrc.mongo.play.json.formats.MongoJavatimeFormats
 
 import java.time.Instant
 import java.util.UUID
+import scala.xml.{Elem, Node, TopScope}
 
 case class Movement(
                      _id: String,
@@ -56,15 +59,25 @@ object Movement {
       administrativeReferenceCode, lastUpdated, messages)
 }
 
-object Message {
-  def apply(
-             encodedMessage: String,
-             messageType: String,
-             messageId: String,
-             createdOn: Instant): Message = {
-
-    Message(encodedMessage.hashCode(), encodedMessage, messageType, messageId, createdOn)
-  }
+object Message extends EmcsUtils {
 
   implicit val format: OFormat[Message] = Json.format[Message]
+
+
+  def apply(message: IEMessage, createdOn: Instant): Message = {
+    val xml = message.toXml
+
+    // We are removing all prefix here because we could have message that have the same content,
+    // but different prefix. ShowNewMessage could contains two message that arre the same but may have
+    // different prefix.
+    val hashCode = removePrefix(xml.asInstanceOf[Node]).hashCode()
+    Message(hashCode, encode(xml.toString()), message.messageType, message.messageIdentifier, createdOn)
+  }
+
+  private def removePrefix(x: Node):Node = x match {
+    case e:Elem =>
+      e.copy(scope=TopScope, prefix = null, child = e.child.map(removePrefix))
+    case
+      o => o
+  }
 }

@@ -22,7 +22,7 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.IEMessage
 import uk.gov.hmrc.excisemovementcontrolsystemapi.utils.{EmcsUtils, XmlScope}
 
 import javax.inject.Inject
-import scala.xml.NamespaceBinding
+import scala.xml.{NamespaceBinding, NodeSeq, TopScope}
 
 class NewMessageParserService @Inject()
 (
@@ -38,17 +38,21 @@ class NewMessageParserService @Inject()
 
   def extractMessages(encodedMessage: String): Seq[IEMessage] = {
     val decodedMessage: String = emcsUtils.decode(encodedMessage)
+    val xml = scala.xml.XML.loadString(decodedMessage)
+    val newMessageDataResponse = scalaxb.fromXML[NewMessagesDataResponse](xml)
 
-    getNewMessageDataResponse(decodedMessage) match {
-      case (message, scope) => message.Messages.messagesoption.map(factory.createIEMessage(_, scope))
-    }
-
+    for {
+      m <- newMessageDataResponse.Messages.messagesoption
+      scope = getScopeFromXml(xml, m.key)
+      message = factory.createIEMessage(m, scope)
+    } yield message
   }
 
-  private def getNewMessageDataResponse(decodedMessage: String): (NewMessagesDataResponse, NamespaceBinding) = {
-    val xml = scala.xml.XML.loadString(decodedMessage)
-
-    (scalaxb.fromXML[NewMessagesDataResponse](xml), createScopeFromXml(xml, "NewMessagesDataResponse"))
+  protected def getScopeFromXml(xml: NodeSeq, key: Option[String]) : NamespaceBinding = {
+    key match {
+      case Some(k) => createScopeFromXml(xml, k)
+      case _ => TopScope
+    }
   }
 }
 

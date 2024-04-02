@@ -23,41 +23,23 @@ import scala.xml.{NamespaceBinding, TopScope}
 
 class XmlScopeSpec extends PlaySpec with NewMessagesXml with XmlScope{
 
-  "createFromXml" should {
-    "create scope from XML" in {
+  "createFromXml1" should {
+    "create scope from XML message" in {
 
-      val result = createScopeFromXml(newMessageWith818And802, "NewMessagesDataResponse")
+      val result = createScopeFromXml(newMessageWith818And802, "IE818")
 
       val expectedUnfoldedScope = List(
-        ("ns", "http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/NewMessagesData/3"),
-        ("urn", "urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.01"),
-        ("urn1", "urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE818:V3.01"),
-        ("urn2", "urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE802:V3.01")
+        ("urn", "urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13"),
+        ("urn1", "urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE818:V3.13")
       )
 
       unfoldNS(result).toSet mustBe expectedUnfoldedScope.toSet
     }
 
-    "return an empty" when {
-      "not match found for label" in {
-        val result = createScopeFromXml(newMessageWith818And802, "test")
+    "return a default scope if cannot create scope" in {
+      val result = createScopeFromXml(newMessageWith818And802, "IE201")
 
-        result mustBe TopScope
-      }
-
-      "No scope found" in {
-        val xmlStr =
-          """<body>
-            | <message>test</message>
-            |</body>
-            |""".stripMargin
-
-        val xml = scala.xml.XML.loadString(xmlStr)
-
-        val result = createScopeFromXml(xml, "body")
-
-        result mustBe TopScope
-      }
+      result mustBe generated.defaultScope
     }
   }
 

@@ -18,8 +18,287 @@ package uk.gov.hmrc.excisemovementcontrolsystemapi.data
 
 object SchedulingTestData {
 
-  lazy val ie704 = """<ie704uk:IE704xmlns="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/MovementForTraderData/3"xmlns:doc="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:DOC:V3.13"xmlns:emcs="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:EMCS:V3.13"xmlns:euc="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/EmcsUkCodes/3"xmlns:ie0="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE880:V3.13"xmlns:ie1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE825:V3.13"xmlns:ie2="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE717:V3.13"xmlns:ie3="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE815:V3.13"xmlns:ie="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE934:V3.13"xmlns:ie704uk="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/ie704uk/3"xmlns:ie801="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE801:V3.13"xmlns:ie802="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE802:V3.13"xmlns:ie803="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE803:V3.13"xmlns:ie807="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE807:V3.13"xmlns:ie810="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE810:V3.13"xmlns:ie813="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE813:V3.13"xmlns:ie818="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE818:V3.13"xmlns:ie819="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE819:V3.13"xmlns:ie829="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE829:V3.13"xmlns:ie837="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE837:V3.13"xmlns:ie839="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE839:V3.13"xmlns:ie840="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE840:V3.13"xmlns:ie871="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE871:V3.13"xmlns:ie881="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE881:V3.13"xmlns:ie905="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE905:V3.13"xmlns:tcl="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TCL:V3.13"xmlns:tms="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13"xmlns:tns4="http://www.govtalk.gov.uk/taxation/InternationalTrade/Common/ControlDocument"xmlns:tns5="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/MovementForTraderData/3"xmlns:tns="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/NewMessagesData/3"xmlns:xs="http://www.w3.org/2001/XMLSchema"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><ie704uk:Header><tms:MessageSender>token</tms:MessageSender><tms:MessageRecipient>token</tms:MessageRecipient><tms:DateOfPreparation>2008-09-29</tms:DateOfPreparation><tms:TimeOfPreparation>00:18:33</tms:TimeOfPreparation><tms:MessageIdentifier>messageId-4</tms:MessageIdentifier><tms:CorrelationIdentifier>token</tms:CorrelationIdentifier></ie704uk:Header><ie704uk:Body><ie704uk:GenericRefusalMessage><ie704uk:Attributes><ie704uk:AdministrativeReferenceCode>tokentokentokentokent</ie704uk:AdministrativeReferenceCode><ie704uk:SequenceNumber>to</ie704uk:SequenceNumber><ie704uk:LocalReferenceNumber>token</ie704uk:LocalReferenceNumber></ie704uk:Attributes><ie704uk:FunctionalError><ie704uk:ErrorType>4518</ie704uk:ErrorType><ie704uk:ErrorReason>token</ie704uk:ErrorReason><ie704uk:ErrorLocation>token</ie704uk:ErrorLocation><ie704uk:OriginalAttributeValue>token</ie704uk:OriginalAttributeValue></ie704uk:FunctionalError></ie704uk:GenericRefusalMessage></ie704uk:Body></ie704uk:IE704>"""
-  lazy val ie801 = """<ie801:IE801xmlns="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/MovementForTraderData/3"xmlns:doc="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:DOC:V3.13"xmlns:emcs="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:EMCS:V3.13"xmlns:euc="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/EmcsUkCodes/3"xmlns:ie0="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE880:V3.13"xmlns:ie1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE825:V3.13"xmlns:ie2="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE717:V3.13"xmlns:ie3="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE815:V3.13"xmlns:ie="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE934:V3.13"xmlns:ie704uk="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/ie704uk/3"xmlns:ie801="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE801:V3.13"xmlns:ie802="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE802:V3.13"xmlns:ie803="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE803:V3.13"xmlns:ie807="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE807:V3.13"xmlns:ie810="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE810:V3.13"xmlns:ie813="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE813:V3.13"xmlns:ie818="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE818:V3.13"xmlns:ie819="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE819:V3.13"xmlns:ie829="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE829:V3.13"xmlns:ie837="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE837:V3.13"xmlns:ie839="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE839:V3.13"xmlns:ie840="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE840:V3.13"xmlns:ie871="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE871:V3.13"xmlns:ie881="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE881:V3.13"xmlns:ie905="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE905:V3.13"xmlns:tcl="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TCL:V3.13"xmlns:tms="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13"xmlns:tns4="http://www.govtalk.gov.uk/taxation/InternationalTrade/Common/ControlDocument"xmlns:tns5="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/MovementForTraderData/3"xmlns:tns="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/NewMessagesData/3"xmlns:xs="http://www.w3.org/2001/XMLSchema"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><ie801:Header><tms:MessageSender>token</tms:MessageSender><tms:MessageRecipient>token</tms:MessageRecipient><tms:DateOfPreparation>2018-11-01</tms:DateOfPreparation><tms:TimeOfPreparation>02:02:49+01:00</tms:TimeOfPreparation><tms:MessageIdentifier>messageId-1</tms:MessageIdentifier><tms:CorrelationIdentifier>token</tms:CorrelationIdentifier></ie801:Header><ie801:Body><ie801:EADESADContainer><ie801:ConsigneeTraderlanguage="to"><ie801:Traderid>token</ie801:Traderid><ie801:TraderName>token</ie801:TraderName><ie801:StreetName>token</ie801:StreetName><ie801:StreetNumber>token</ie801:StreetNumber><ie801:Postcode>token</ie801:Postcode><ie801:City>token</ie801:City><ie801:EoriNumber>token</ie801:EoriNumber></ie801:ConsigneeTrader><ie801:ExciseMovement><ie801:AdministrativeReferenceCode>tokentokentokentokent</ie801:AdministrativeReferenceCode><ie801:DateAndTimeOfValidationOfEadEsad>2002-11-05T08:01:03</ie801:DateAndTimeOfValidationOfEadEsad></ie801:ExciseMovement><ie801:ConsignorTraderlanguage="to"><ie801:TraderExciseNumber>tokentokentok</ie801:TraderExciseNumber><ie801:TraderName>token</ie801:TraderName><ie801:StreetName>token</ie801:StreetName><ie801:StreetNumber>token</ie801:StreetNumber><ie801:Postcode>token</ie801:Postcode><ie801:City>token</ie801:City></ie801:ConsignorTrader><ie801:PlaceOfDispatchTraderlanguage="to"><ie801:ReferenceOfTaxWarehouse>tokentokentok</ie801:ReferenceOfTaxWarehouse><ie801:TraderName>token</ie801:TraderName><ie801:StreetName>token</ie801:StreetName><ie801:StreetNumber>token</ie801:StreetNumber><ie801:Postcode>token</ie801:Postcode><ie801:City>token</ie801:City></ie801:PlaceOfDispatchTrader><ie801:DispatchImportOffice><ie801:ReferenceNumber>tokentok</ie801:ReferenceNumber></ie801:DispatchImportOffice><ie801:ComplementConsigneeTrader><ie801:MemberStateCode>to</ie801:MemberStateCode><ie801:SerialNumberOfCertificateOfExemption>token</ie801:SerialNumberOfCertificateOfExemption></ie801:ComplementConsigneeTrader><ie801:DeliveryPlaceTraderlanguage="to"><ie801:Traderid>token</ie801:Traderid><ie801:TraderName>token</ie801:TraderName><ie801:StreetName>token</ie801:StreetName><ie801:StreetNumber>token</ie801:StreetNumber><ie801:Postcode>token</ie801:Postcode><ie801:City>token</ie801:City></ie801:DeliveryPlaceTrader><ie801:DeliveryPlaceCustomsOffice><ie801:ReferenceNumber>tokentok</ie801:ReferenceNumber></ie801:DeliveryPlaceCustomsOffice><ie801:CompetentAuthorityDispatchOffice><ie801:ReferenceNumber>tokentok</ie801:ReferenceNumber></ie801:CompetentAuthorityDispatchOffice><ie801:TransportArrangerTraderlanguage="to"><ie801:VatNumber>token</ie801:VatNumber><ie801:TraderName>token</ie801:TraderName><ie801:StreetName>token</ie801:StreetName><ie801:StreetNumber>token</ie801:StreetNumber><ie801:Postcode>token</ie801:Postcode><ie801:City>token</ie801:City></ie801:TransportArrangerTrader><ie801:FirstTransporterTraderlanguage="to"><ie801:VatNumber>token</ie801:VatNumber><ie801:TraderName>token</ie801:TraderName><ie801:StreetName>token</ie801:StreetName><ie801:StreetNumber>token</ie801:StreetNumber><ie801:Postcode>token</ie801:Postcode><ie801:City>token</ie801:City></ie801:FirstTransporterTrader><ie801:DocumentCertificate><ie801:DocumentType>toke</ie801:DocumentType><ie801:DocumentReference>token</ie801:DocumentReference><ie801:DocumentDescriptionlanguage="to">token</ie801:DocumentDescription><ie801:ReferenceOfDocumentlanguage="to">token</ie801:ReferenceOfDocument></ie801:DocumentCertificate><ie801:EadEsad><ie801:LocalReferenceNumber>token</ie801:LocalReferenceNumber><ie801:InvoiceNumber>token</ie801:InvoiceNumber><ie801:InvoiceDate>2002-06-24+01:00</ie801:InvoiceDate><ie801:OriginTypeCode>3</ie801:OriginTypeCode><ie801:DateOfDispatch>2012-01-07</ie801:DateOfDispatch><ie801:TimeOfDispatch>09:44:59</ie801:TimeOfDispatch><ie801:UpstreamArc>tokentokentokentokent</ie801:UpstreamArc><ie801:ImportSad><ie801:ImportSadNumber>token</ie801:ImportSadNumber></ie801:ImportSad></ie801:EadEsad><ie801:HeaderEadEsad><ie801:SequenceNumber>to</ie801:SequenceNumber><ie801:DateAndTimeOfUpdateValidation>2013-06-17T18:14:58</ie801:DateAndTimeOfUpdateValidation><ie801:DestinationTypeCode>10</ie801:DestinationTypeCode><ie801:JourneyTime>tok</ie801:JourneyTime><ie801:TransportArrangement>4</ie801:TransportArrangement></ie801:HeaderEadEsad><ie801:TransportMode><ie801:TransportModeCode>to</ie801:TransportModeCode><ie801:ComplementaryInformationlanguage="to">token</ie801:ComplementaryInformation></ie801:TransportMode><ie801:MovementGuarantee><ie801:GuarantorTypeCode>12</ie801:GuarantorTypeCode><ie801:GuarantorTraderlanguage="to"><ie801:TraderExciseNumber>tokentokentok</ie801:TraderExciseNumber><ie801:TraderName>token</ie801:TraderName><ie801:StreetName>token</ie801:StreetName><ie801:StreetNumber>token</ie801:StreetNumber><ie801:City>token</ie801:City><ie801:Postcode>token</ie801:Postcode><ie801:VatNumber>token</ie801:VatNumber></ie801:GuarantorTrader></ie801:MovementGuarantee><ie801:BodyEadEsad><ie801:BodyRecordUniqueReference>tok</ie801:BodyRecordUniqueReference><ie801:ExciseProductCode>toke</ie801:ExciseProductCode><ie801:CnCode>tokentok</ie801:CnCode><ie801:Quantity>1000.00000000000</ie801:Quantity><ie801:GrossMass>1000.000000000000</ie801:GrossMass><ie801:NetMass>1000.000000000000</ie801:NetMass><ie801:AlcoholicStrengthByVolumeInPercentage>1000.00</ie801:AlcoholicStrengthByVolumeInPercentage><ie801:DegreePlato>1000.00</ie801:DegreePlato><ie801:FiscalMarklanguage="to">token</ie801:FiscalMark><ie801:FiscalMarkUsedFlag>1</ie801:FiscalMarkUsedFlag><ie801:DesignationOfOriginlanguage="to">token</ie801:DesignationOfOrigin><ie801:SizeOfProducer>token</ie801:SizeOfProducer><ie801:Density>1000.00</ie801:Density><ie801:CommercialDescriptionlanguage="to">token</ie801:CommercialDescription><ie801:BrandNameOfProductslanguage="to">token</ie801:BrandNameOfProducts><ie801:MaturationPeriodOrAgeOfProducts>token</ie801:MaturationPeriodOrAgeOfProducts><ie801:Package><ie801:KindOfPackages>to</ie801:KindOfPackages><ie801:NumberOfPackages>token</ie801:NumberOfPackages><ie801:ShippingMarks>token</ie801:ShippingMarks><ie801:CommercialSealIdentification>token</ie801:CommercialSealIdentification><ie801:SealInformationlanguage="to">token</ie801:SealInformation></ie801:Package><ie801:WineProduct><ie801:WineProductCategory>2</ie801:WineProductCategory><ie801:WineGrowingZoneCode>to</ie801:WineGrowingZoneCode><ie801:ThirdCountryOfOrigin>to</ie801:ThirdCountryOfOrigin><ie801:OtherInformationlanguage="to">token</ie801:OtherInformation><ie801:WineOperation><ie801:WineOperationCode>to</ie801:WineOperationCode></ie801:WineOperation></ie801:WineProduct></ie801:BodyEadEsad><ie801:TransportDetails><ie801:TransportUnitCode>to</ie801:TransportUnitCode><ie801:IdentityOfTransportUnits>token</ie801:IdentityOfTransportUnits><ie801:CommercialSealIdentification>token</ie801:CommercialSealIdentification><ie801:ComplementaryInformationlanguage="to">token</ie801:ComplementaryInformation><ie801:SealInformationlanguage="to">token</ie801:SealInformation></ie801:TransportDetails></ie801:EADESADContainer></ie801:Body></ie801:IE801>"""
-  lazy val ie818 = """<ie818:IE818xmlns="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/MovementForTraderData/3"xmlns:doc="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:DOC:V3.13"xmlns:emcs="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:EMCS:V3.13"xmlns:euc="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/EmcsUkCodes/3"xmlns:ie0="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE880:V3.13"xmlns:ie1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE825:V3.13"xmlns:ie2="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE717:V3.13"xmlns:ie3="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE815:V3.13"xmlns:ie="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE934:V3.13"xmlns:ie704uk="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/ie704uk/3"xmlns:ie801="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE801:V3.13"xmlns:ie802="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE802:V3.13"xmlns:ie803="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE803:V3.13"xmlns:ie807="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE807:V3.13"xmlns:ie810="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE810:V3.13"xmlns:ie813="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE813:V3.13"xmlns:ie818="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE818:V3.13"xmlns:ie819="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE819:V3.13"xmlns:ie829="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE829:V3.13"xmlns:ie837="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE837:V3.13"xmlns:ie839="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE839:V3.13"xmlns:ie840="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE840:V3.13"xmlns:ie871="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE871:V3.13"xmlns:ie881="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE881:V3.13"xmlns:ie905="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE905:V3.13"xmlns:tcl="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TCL:V3.13"xmlns:tms="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13"xmlns:tns4="http://www.govtalk.gov.uk/taxation/InternationalTrade/Common/ControlDocument"xmlns:tns5="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/MovementForTraderData/3"xmlns:tns="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/NewMessagesData/3"xmlns:xs="http://www.w3.org/2001/XMLSchema"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><ie818:Header><tms:MessageSender>token</tms:MessageSender><tms:MessageRecipient>token</tms:MessageRecipient><tms:DateOfPreparation>2008-09-29</tms:DateOfPreparation><tms:TimeOfPreparation>00:18:33</tms:TimeOfPreparation><tms:MessageIdentifier>messageId-2</tms:MessageIdentifier><tms:CorrelationIdentifier>token</tms:CorrelationIdentifier></ie818:Header><ie818:Body><ie818:AcceptedOrRejectedReportOfReceiptExport><ie818:Attributes><ie818:DateAndTimeOfValidationOfReportOfReceiptExport>2006-08-19T18:27:14+01:00</ie818:DateAndTimeOfValidationOfReportOfReceiptExport></ie818:Attributes><ie818:ConsigneeTraderlanguage="to"><ie818:Traderid>token</ie818:Traderid><ie818:TraderName>token</ie818:TraderName><ie818:StreetName>token</ie818:StreetName><ie818:StreetNumber>token</ie818:StreetNumber><ie818:Postcode>token</ie818:Postcode><ie818:City>token</ie818:City><ie818:EoriNumber>token</ie818:EoriNumber></ie818:ConsigneeTrader><ie818:ExciseMovement><ie818:AdministrativeReferenceCode>tokentokentokentokent</ie818:AdministrativeReferenceCode><ie818:SequenceNumber>to</ie818:SequenceNumber></ie818:ExciseMovement><ie818:DeliveryPlaceTraderlanguage="to"><ie818:Traderid>token</ie818:Traderid><ie818:TraderName>token</ie818:TraderName><ie818:StreetName>token</ie818:StreetName><ie818:StreetNumber>token</ie818:StreetNumber><ie818:Postcode>token</ie818:Postcode><ie818:City>token</ie818:City></ie818:DeliveryPlaceTrader><ie818:DestinationOffice><ie818:ReferenceNumber>tokentok</ie818:ReferenceNumber></ie818:DestinationOffice><ie818:ReportOfReceiptExport><ie818:DateOfArrivalOfExciseProducts>2009-05-16</ie818:DateOfArrivalOfExciseProducts><ie818:GlobalConclusionOfReceipt>3</ie818:GlobalConclusionOfReceipt><ie818:ComplementaryInformationlanguage="to">token</ie818:ComplementaryInformation></ie818:ReportOfReceiptExport><ie818:BodyReportOfReceiptExport><ie818:BodyRecordUniqueReference>tok</ie818:BodyRecordUniqueReference><ie818:IndicatorOfShortageOrExcess>E</ie818:IndicatorOfShortageOrExcess><ie818:ObservedShortageOrExcess>1000.00000000000</ie818:ObservedShortageOrExcess><ie818:ExciseProductCode>toke</ie818:ExciseProductCode><ie818:RefusedQuantity>1000.00000000000</ie818:RefusedQuantity><ie818:UnsatisfactoryReason><ie818:UnsatisfactoryReasonCode>to</ie818:UnsatisfactoryReasonCode><ie818:ComplementaryInformationlanguage="to">token</ie818:ComplementaryInformation></ie818:UnsatisfactoryReason></ie818:BodyReportOfReceiptExport></ie818:AcceptedOrRejectedReportOfReceiptExport></ie818:Body></ie818:IE818>"""
-  lazy val ie802 = """<ie802:IE802xmlns="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/MovementForTraderData/3"xmlns:doc="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:DOC:V3.13"xmlns:emcs="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:EMCS:V3.13"xmlns:euc="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/EmcsUkCodes/3"xmlns:ie0="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE880:V3.13"xmlns:ie1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE825:V3.13"xmlns:ie2="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE717:V3.13"xmlns:ie3="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE815:V3.13"xmlns:ie="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE934:V3.13"xmlns:ie704uk="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/ie704uk/3"xmlns:ie801="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE801:V3.13"xmlns:ie802="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE802:V3.13"xmlns:ie803="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE803:V3.13"xmlns:ie807="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE807:V3.13"xmlns:ie810="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE810:V3.13"xmlns:ie813="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE813:V3.13"xmlns:ie818="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE818:V3.13"xmlns:ie819="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE819:V3.13"xmlns:ie829="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE829:V3.13"xmlns:ie837="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE837:V3.13"xmlns:ie839="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE839:V3.13"xmlns:ie840="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE840:V3.13"xmlns:ie871="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE871:V3.13"xmlns:ie881="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE881:V3.13"xmlns:ie905="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE905:V3.13"xmlns:tcl="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TCL:V3.13"xmlns:tms="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13"xmlns:tns4="http://www.govtalk.gov.uk/taxation/InternationalTrade/Common/ControlDocument"xmlns:tns5="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/MovementForTraderData/3"xmlns:tns="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/NewMessagesData/3"xmlns:xs="http://www.w3.org/2001/XMLSchema"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><ie802:Header><tms:MessageSender>token</tms:MessageSender><tms:MessageRecipient>token</tms:MessageRecipient><tms:DateOfPreparation>2015-08-24</tms:DateOfPreparation><tms:TimeOfPreparation>23:07:00+01:00</tms:TimeOfPreparation><tms:MessageIdentifier>messageId-3</tms:MessageIdentifier><tms:CorrelationIdentifier>token</tms:CorrelationIdentifier></ie802:Header><ie802:Body><ie802:ReminderMessageForExciseMovement><ie802:Attributes><ie802:DateAndTimeOfIssuanceOfReminder>2000-04-21T01:36:55+01:00</ie802:DateAndTimeOfIssuanceOfReminder><ie802:ReminderInformationlanguage="to">token</ie802:ReminderInformation><ie802:LimitDateAndTime>2017-04-19T15:38:57+01:00</ie802:LimitDateAndTime><ie802:ReminderMessageType>1</ie802:ReminderMessageType></ie802:Attributes><ie802:ExciseMovement><ie802:AdministrativeReferenceCode>tokentokentokentokent</ie802:AdministrativeReferenceCode><ie802:SequenceNumber>to</ie802:SequenceNumber></ie802:ExciseMovement></ie802:ReminderMessageForExciseMovement></ie802:Body></ie802:IE802>"""
+  lazy val ie704 =
+    <IE704
+      xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13"
+      xmlns:ns1="http://www.govtalk.gov.uk/taxation/InternationalTrade/Excise/ie704uk/3">
+      <ns1:Header>
+        <urn:MessageSender>token</urn:MessageSender>
+        <urn:MessageRecipient>token</urn:MessageRecipient>
+        <urn:DateOfPreparation>2008-09-29</urn:DateOfPreparation>
+        <urn:TimeOfPreparation>00:18:33</urn:TimeOfPreparation>
+        <urn:MessageIdentifier>messageId-4</urn:MessageIdentifier>
+        <urn:CorrelationIdentifier>token</urn:CorrelationIdentifier>
+      </ns1:Header>
+      <ns1:Body>
+        <ns1:GenericRefusalMessage>
+          <ns1:Attributes>
+            <ns1:AdministrativeReferenceCode>tokentokentokentokent</ns1:AdministrativeReferenceCode>
+            <ns1:SequenceNumber>to</ns1:SequenceNumber>
+            <ns1:LocalReferenceNumber>token</ns1:LocalReferenceNumber>
+          </ns1:Attributes>
+          <ns1:FunctionalError>
+            <ns1:ErrorType>4518</ns1:ErrorType>
+            <ns1:ErrorReason>token</ns1:ErrorReason>
+            <ns1:ErrorLocation>token</ns1:ErrorLocation>
+            <ns1:OriginalAttributeValue>token</ns1:OriginalAttributeValue>
+          </ns1:FunctionalError>
+        </ns1:GenericRefusalMessage>
+      </ns1:Body>
+    </IE704>
+
+  lazy val ie801 =
+  <IE801
+    xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13"
+    xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE801:V3.13">
+    <urn1:Header>
+      <urn:MessageSender>token</urn:MessageSender>
+      <urn:MessageRecipient>token</urn:MessageRecipient>
+      <urn:DateOfPreparation>2018-11-01</urn:DateOfPreparation>
+      <urn:TimeOfPreparation>02:02:49+01:00</urn:TimeOfPreparation>
+      <urn:MessageIdentifier>messageId-1</urn:MessageIdentifier>
+      <urn:CorrelationIdentifier>token</urn:CorrelationIdentifier>
+    </urn1:Header>
+    <urn1:Body>
+      <urn1:EADESADContainer>
+        <urn1:ConsigneeTrader language="to">
+          <urn1:Traderid>token</urn1:Traderid>
+          <urn1:TraderName>token</urn1:TraderName>
+          <urn1:StreetName>token</urn1:StreetName>
+          <urn1:StreetNumber>token</urn1:StreetNumber>
+          <urn1:Postcode>token</urn1:Postcode>
+          <urn1:City>token</urn1:City>
+          <urn1:EoriNumber>token</urn1:EoriNumber>
+        </urn1:ConsigneeTrader>
+        <urn1:ExciseMovement>
+          <urn1:AdministrativeReferenceCode>tokentokentokentokent</urn1:AdministrativeReferenceCode>
+          <urn1:DateAndTimeOfValidationOfEadEsad>2002-11-05T08:01:03</urn1:DateAndTimeOfValidationOfEadEsad>
+        </urn1:ExciseMovement>
+        <urn1:ConsignorTrader language="to">
+          <urn1:TraderExciseNumber>tokentokentok</urn1:TraderExciseNumber>
+          <urn1:TraderName>token</urn1:TraderName>
+          <urn1:StreetName>token</urn1:StreetName>
+          <urn1:StreetNumber>token</urn1:StreetNumber>
+          <urn1:Postcode>token</urn1:Postcode>
+          <urn1:City>token</urn1:City>
+        </urn1:ConsignorTrader>
+        <urn1:PlaceOfDispatchTrader language="to">
+          <urn1:ReferenceOfTaxWarehouse>tokentokentok</urn1:ReferenceOfTaxWarehouse>
+          <urn1:TraderName>token</urn1:TraderName>
+          <urn1:StreetName>token</urn1:StreetName>
+          <urn1:StreetNumber>token</urn1:StreetNumber>
+          <urn1:Postcode>token</urn1:Postcode>
+          <urn1:City>token</urn1:City>
+        </urn1:PlaceOfDispatchTrader>
+        <urn1:DispatchImportOffice>
+          <urn1:ReferenceNumber>tokentok</urn1:ReferenceNumber>
+        </urn1:DispatchImportOffice>
+        <urn1:ComplementConsigneeTrader>
+          <urn1:MemberStateCode>to</urn1:MemberStateCode>
+          <urn1:SerialNumberOfCertificateOfExemption>token</urn1:SerialNumberOfCertificateOfExemption>
+        </urn1:ComplementConsigneeTrader>
+        <urn1:DeliveryPlaceTrader language="to">
+          <urn1:Traderid>token</urn1:Traderid>
+          <urn1:TraderName>token</urn1:TraderName>
+          <urn1:StreetName>token</urn1:StreetName>
+          <urn1:StreetNumber>token</urn1:StreetNumber>
+          <urn1:Postcode>token</urn1:Postcode>
+          <urn1:City>token</urn1:City>
+        </urn1:DeliveryPlaceTrader>
+        <urn1:DeliveryPlaceCustomsOffice>
+          <urn1:ReferenceNumber>tokentok</urn1:ReferenceNumber>
+        </urn1:DeliveryPlaceCustomsOffice>
+        <urn1:CompetentAuthorityDispatchOffice>
+          <urn1:ReferenceNumber>tokentok</urn1:ReferenceNumber>
+        </urn1:CompetentAuthorityDispatchOffice>
+        <urn1:TransportArrangerTrader language="to">
+          <urn1:VatNumber>token</urn1:VatNumber>
+          <urn1:TraderName>token</urn1:TraderName>
+          <urn1:StreetName>token</urn1:StreetName>
+          <urn1:StreetNumber>token</urn1:StreetNumber>
+          <urn1:Postcode>token</urn1:Postcode>
+          <urn1:City>token</urn1:City>
+        </urn1:TransportArrangerTrader>
+        <urn1:FirstTransporterTrader language="to">
+          <urn1:VatNumber>token</urn1:VatNumber>
+          <urn1:TraderName>token</urn1:TraderName>
+          <urn1:StreetName>token</urn1:StreetName>
+          <urn1:StreetNumber>token</urn1:StreetNumber>
+          <urn1:Postcode>token</urn1:Postcode>
+          <urn1:City>token</urn1:City>
+        </urn1:FirstTransporterTrader>
+        <urn1:DocumentCertificate>
+          <urn1:DocumentType>toke</urn1:DocumentType>
+          <urn1:DocumentReference>token</urn1:DocumentReference>
+          <urn1:DocumentDescription language="to">token</urn1:DocumentDescription>
+          <urn1:ReferenceOfDocument language="to">token</urn1:ReferenceOfDocument>
+        </urn1:DocumentCertificate>
+        <urn1:EadEsad>
+          <urn1:LocalReferenceNumber>token</urn1:LocalReferenceNumber>
+          <urn1:InvoiceNumber>token</urn1:InvoiceNumber>
+          <urn1:InvoiceDate>2002-06-24+01:00</urn1:InvoiceDate>
+          <urn1:OriginTypeCode>3</urn1:OriginTypeCode>
+          <urn1:DateOfDispatch>2012-01-07</urn1:DateOfDispatch>
+          <urn1:TimeOfDispatch>09:44:59</urn1:TimeOfDispatch>
+          <urn1:UpstreamArc>tokentokentokentokent</urn1:UpstreamArc>
+          <urn1:ImportSad>
+            <urn1:ImportSadNumber>token</urn1:ImportSadNumber>
+          </urn1:ImportSad>
+        </urn1:EadEsad>
+        <urn1:HeaderEadEsad>
+          <urn1:SequenceNumber>to</urn1:SequenceNumber>
+          <urn1:DateAndTimeOfUpdateValidation>2013-06-17T18:14:58</urn1:DateAndTimeOfUpdateValidation>
+          <urn1:DestinationTypeCode>10</urn1:DestinationTypeCode>
+          <urn1:JourneyTime>tok</urn1:JourneyTime>
+          <urn1:TransportArrangement>4</urn1:TransportArrangement>
+        </urn1:HeaderEadEsad>
+        <urn1:TransportMode>
+          <urn1:TransportModeCode>to</urn1:TransportModeCode>
+          <urn1:ComplementaryInformation language="to">token</urn1:ComplementaryInformation>
+        </urn1:TransportMode>
+        <urn1:MovementGuarantee>
+          <urn1:GuarantorTypeCode>12</urn1:GuarantorTypeCode>
+          <urn1:GuarantorTrader language="to">
+            <urn1:TraderExciseNumber>tokentokentok</urn1:TraderExciseNumber>
+            <urn1:TraderName>token</urn1:TraderName>
+            <urn1:StreetName>token</urn1:StreetName>
+            <urn1:StreetNumber>token</urn1:StreetNumber>
+            <urn1:City>token</urn1:City>
+            <urn1:Postcode>token</urn1:Postcode>
+            <urn1:VatNumber>token</urn1:VatNumber>
+          </urn1:GuarantorTrader>
+        </urn1:MovementGuarantee>
+        <urn1:BodyEadEsad>
+          <urn1:BodyRecordUniqueReference>tok</urn1:BodyRecordUniqueReference>
+          <urn1:ExciseProductCode>toke</urn1:ExciseProductCode>
+          <urn1:CnCode>tokentok</urn1:CnCode>
+          <urn1:Quantity>1000.00000000000</urn1:Quantity>
+          <urn1:GrossMass>1000.000000000000</urn1:GrossMass>
+          <urn1:NetMass>1000.000000000000</urn1:NetMass>
+          <urn1:AlcoholicStrengthByVolumeInPercentage>1000.00</urn1:AlcoholicStrengthByVolumeInPercentage>
+          <urn1:DegreePlato>1000.00</urn1:DegreePlato>
+          <urn1:FiscalMark language="to">token</urn1:FiscalMark>
+          <urn1:FiscalMarkUsedFlag>1</urn1:FiscalMarkUsedFlag>
+          <urn1:DesignationOfOrigin language="to">token</urn1:DesignationOfOrigin>
+          <urn1:SizeOfProducer>token</urn1:SizeOfProducer>
+          <urn1:Density>1000.00</urn1:Density>
+          <urn1:CommercialDescription language="to">token</urn1:CommercialDescription>
+          <urn1:BrandNameOfProducts language="to">token</urn1:BrandNameOfProducts>
+          <urn1:MaturationPeriodOrAgeOfProducts>token</urn1:MaturationPeriodOrAgeOfProducts>
+          <urn1:Package>
+            <urn1:KindOfPackages>to</urn1:KindOfPackages>
+            <urn1:NumberOfPackages>token</urn1:NumberOfPackages>
+            <urn1:ShippingMarks>token</urn1:ShippingMarks>
+            <urn1:CommercialSealIdentification>token</urn1:CommercialSealIdentification>
+            <urn1:SealInformation language="to">token</urn1:SealInformation>
+          </urn1:Package>
+          <urn1:WineProduct>
+            <urn1:WineProductCategory>2</urn1:WineProductCategory>
+            <urn1:WineGrowingZoneCode>to</urn1:WineGrowingZoneCode>
+            <urn1:ThirdCountryOfOrigin>to</urn1:ThirdCountryOfOrigin>
+            <urn1:OtherInformation language="to">token</urn1:OtherInformation>
+            <urn1:WineOperation>
+              <urn1:WineOperationCode>to</urn1:WineOperationCode>
+            </urn1:WineOperation>
+          </urn1:WineProduct>
+        </urn1:BodyEadEsad>
+        <urn1:TransportDetails>
+          <urn1:TransportUnitCode>to</urn1:TransportUnitCode>
+          <urn1:IdentityOfTransportUnits>token</urn1:IdentityOfTransportUnits>
+          <urn1:CommercialSealIdentification>token</urn1:CommercialSealIdentification>
+          <urn1:ComplementaryInformation language="to">token</urn1:ComplementaryInformation>
+          <urn1:SealInformation language="to">token</urn1:SealInformation>
+        </urn1:TransportDetails>
+      </urn1:EADESADContainer>
+    </urn1:Body>
+  </IE801>
+
+  lazy val ie818 =
+    <IE818
+    xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13"
+    xmlns:urn1="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE818:V3.13">
+    <urn1:Header>
+      <urn:MessageSender>token</urn:MessageSender>
+      <urn:MessageRecipient>token</urn:MessageRecipient>
+      <urn:DateOfPreparation>2008-09-29</urn:DateOfPreparation>
+      <urn:TimeOfPreparation>00:18:33</urn:TimeOfPreparation>
+      <urn:MessageIdentifier>messageId-2</urn:MessageIdentifier>
+      <urn:CorrelationIdentifier>token</urn:CorrelationIdentifier>
+    </urn1:Header>
+    <urn1:Body>
+      <urn1:AcceptedOrRejectedReportOfReceiptExport>
+        <urn1:Attributes>
+          <urn1:DateAndTimeOfValidationOfReportOfReceiptExport>2006-08-19T18:27:14+01:00</urn1:DateAndTimeOfValidationOfReportOfReceiptExport>
+        </urn1:Attributes>
+        <urn1:ConsigneeTrader language="to">
+          <urn1:Traderid>token</urn1:Traderid>
+          <urn1:TraderName>token</urn1:TraderName>
+          <urn1:StreetName>token</urn1:StreetName>
+          <urn1:StreetNumber>token</urn1:StreetNumber>
+          <urn1:Postcode>token</urn1:Postcode>
+          <urn1:City>token</urn1:City>
+          <urn1:EoriNumber>token</urn1:EoriNumber>
+        </urn1:ConsigneeTrader>
+        <urn1:ExciseMovement>
+          <urn1:AdministrativeReferenceCode>tokentokentokentokent</urn1:AdministrativeReferenceCode>
+          <urn1:SequenceNumber>to</urn1:SequenceNumber>
+        </urn1:ExciseMovement>
+        <urn1:DeliveryPlaceTrader language="to">
+          <urn1:Traderid>token</urn1:Traderid>
+          <urn1:TraderName>token</urn1:TraderName>
+          <urn1:StreetName>token</urn1:StreetName>
+          <urn1:StreetNumber>token</urn1:StreetNumber>
+          <urn1:Postcode>token</urn1:Postcode>
+          <urn1:City>token</urn1:City>
+        </urn1:DeliveryPlaceTrader>
+        <urn1:DestinationOffice>
+          <urn1:ReferenceNumber>tokentok</urn1:ReferenceNumber>
+        </urn1:DestinationOffice>
+        <urn1:ReportOfReceiptExport>
+          <urn1:DateOfArrivalOfExciseProducts>2009-05-16</urn1:DateOfArrivalOfExciseProducts>
+          <urn1:GlobalConclusionOfReceipt>3</urn1:GlobalConclusionOfReceipt>
+          <urn1:ComplementaryInformation language="to">token</urn1:ComplementaryInformation>
+        </urn1:ReportOfReceiptExport>
+        <urn1:BodyReportOfReceiptExport>
+          <urn1:BodyRecordUniqueReference>tok</urn1:BodyRecordUniqueReference>
+          <urn1:IndicatorOfShortageOrExcess>E</urn1:IndicatorOfShortageOrExcess>
+          <urn1:ObservedShortageOrExcess>1000.00000000000</urn1:ObservedShortageOrExcess>
+          <urn1:ExciseProductCode>toke</urn1:ExciseProductCode>
+          <urn1:RefusedQuantity>1000.00000000000</urn1:RefusedQuantity>
+          <urn1:UnsatisfactoryReason>
+            <urn1:UnsatisfactoryReasonCode>to</urn1:UnsatisfactoryReasonCode>
+            <urn1:ComplementaryInformation language="to">token</urn1:ComplementaryInformation>
+          </urn1:UnsatisfactoryReason>
+        </urn1:BodyReportOfReceiptExport>
+      </urn1:AcceptedOrRejectedReportOfReceiptExport>
+    </urn1:Body>
+  </IE818>
+
+  lazy val ie802 =
+    <IE802
+    xmlns:urn="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:TMS:V3.13"
+    xmlns:urn2="urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:IE802:V3.13">
+    <urn2:Header>
+      <urn:MessageSender>token</urn:MessageSender>
+      <urn:MessageRecipient>token</urn:MessageRecipient>
+      <urn:DateOfPreparation>2015-08-24</urn:DateOfPreparation>
+      <urn:TimeOfPreparation>23:07:00+01:00</urn:TimeOfPreparation>
+      <urn:MessageIdentifier>messageId-3</urn:MessageIdentifier>
+      <urn:CorrelationIdentifier>token</urn:CorrelationIdentifier>
+    </urn2:Header>
+    <urn2:Body>
+      <urn2:ReminderMessageForExciseMovement>
+        <urn2:Attributes>
+          <urn2:DateAndTimeOfIssuanceOfReminder>2000-04-21T01:36:55+01:00</urn2:DateAndTimeOfIssuanceOfReminder>
+          <urn2:ReminderInformation language="to">token</urn2:ReminderInformation>
+          <urn2:LimitDateAndTime>2017-04-19T15:38:57+01:00</urn2:LimitDateAndTime>
+          <urn2:ReminderMessageType>1</urn2:ReminderMessageType>
+        </urn2:Attributes>
+        <urn2:ExciseMovement>
+          <urn2:AdministrativeReferenceCode>tokentokentokentokent</urn2:AdministrativeReferenceCode>
+          <urn2:SequenceNumber>to</urn2:SequenceNumber>
+        </urn2:ExciseMovement>
+      </urn2:ReminderMessageForExciseMovement>
+    </urn2:Body>
+  </IE802>
 }

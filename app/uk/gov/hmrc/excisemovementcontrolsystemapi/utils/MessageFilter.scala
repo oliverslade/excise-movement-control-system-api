@@ -33,9 +33,7 @@ class MessageFilter @Inject()
 
     messageParser.extractMessages(encodedMessage.message)
       .filter(_.lrnEquals(lrnToFilterBy))
-      .map { m =>
-        val encodedMessage = emcsUtils.encode(m.toXml.toString())
-        Message(encodedMessage, m.messageType, m.messageIdentifier, dateTimeService.timestamp())
+      .map { m => Message(m, dateTimeService.timestamp())
       }
   }
 }

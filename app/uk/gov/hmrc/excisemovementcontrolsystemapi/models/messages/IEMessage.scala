@@ -16,27 +16,20 @@
 
 package uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages
 
-import play.api.libs.json.JsValue
 import generated.{Number1Value31, Number2Value30, SubmitterType}
+import play.api.libs.json.JsValue
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.auditing.AuditType
 
 import scala.xml.NodeSeq
 
 trait IEMessage  {
   def messageIdentifier: String
-
   def consigneeId: Option[String]
-
   def administrativeReferenceCode: Seq[Option[String]]
-
   def messageType: String
-
   def toXml: NodeSeq
-
   def toJson: JsValue
-
   def lrnEquals(lrn: String): Boolean
-
   def auditType: AuditType
 }
 

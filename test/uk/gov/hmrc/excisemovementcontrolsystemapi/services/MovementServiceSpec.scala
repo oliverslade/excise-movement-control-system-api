@@ -30,7 +30,6 @@ import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.IEMessage
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.{ErrorResponse, MessageTypes}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.repository.MovementRepository
 import uk.gov.hmrc.excisemovementcontrolsystemapi.repository.model.{Message, Movement}
-import uk.gov.hmrc.excisemovementcontrolsystemapi.services.MovementService
 import uk.gov.hmrc.excisemovementcontrolsystemapi.utils.{DateTimeService, EmcsUtils}
 import uk.gov.hmrc.http.HeaderCarrier
 
@@ -38,6 +37,7 @@ import java.nio.charset.StandardCharsets
 import java.time.Instant
 import java.util.Base64
 import scala.concurrent.ExecutionContext
+import scala.xml.NodeSeq
 
 class MovementServiceSpec extends PlaySpec with EitherValues with BeforeAndAfterEach {
 
@@ -169,8 +169,8 @@ class MovementServiceSpec extends PlaySpec with EitherValues with BeforeAndAfter
 
   "getMovementByLRNAndERNIn with valid LRN and ERN combination" should {
     "return  a movement" in {
-      val message1 = Message("123456", "IE801", "messageId1", testDateTime)
-      val message2 = Message("ABCDE", "IE815", "messageId2", testDateTime)
+      val message1 = Message(123, "123456", "IE801", "messageId1", testDateTime)
+      val message2 = Message(456, "ABCDE", "IE815", "messageId2", testDateTime)
       val movement = Movement(Some("boxId"), lrn, consignorId, Some(consigneeId), None, Instant.now(), Seq(message1, message2))
       when(mockMovementRepository.getMovementByLRNAndERNIn(any, any))
         .thenReturn(Future.successful(Seq(movement)))
@@ -336,8 +336,8 @@ class MovementServiceSpec extends PlaySpec with EitherValues with BeforeAndAfter
   "updateMovement" should {
 
     val messageIdForNewMessage = "messageId3"
-    val cachedMessage1 = Message("<IE801>test</IE801>", MessageTypes.IE801.value, "messageId1", testDateTime)
-    val cachedMessage2 = Message("<IE802>test</IE802>", MessageTypes.IE802.value, "messageId2", testDateTime)
+    val cachedMessage1 = Message(123, "<IE801>test</IE801>", MessageTypes.IE801.value, "messageId1", testDateTime)
+    val cachedMessage2 = Message(456, "<IE802>test</IE802>", MessageTypes.IE802.value, "messageId2", testDateTime)
 
     val movementARC456 = Movement(Some("boxId"), "123", consignorId, None, Some("456"), testDateTime, Seq.empty)
     val movementARC89 = Movement(Some("boxId"), "345", consignorId, None, Some("89"), testDateTime, Seq.empty)
@@ -346,8 +346,9 @@ class MovementServiceSpec extends PlaySpec with EitherValues with BeforeAndAfter
     val movementNoArcLrn789 = Movement(Some("boxId"), "789", consignorId, None, None, testDateTime, Seq.empty)
 
     val cachedMovements = Seq(movementARC456, movementARC89, movementARC890, movementNoArcLrn456, movementNoArcLrn789)
-    val encodeMessage = Base64.getEncoder.encodeToString("<IE818>test</IE818>".getBytes(StandardCharsets.UTF_8))
-    val expectedMessage = Message(encodeMessage, MessageTypes.IE818.value, messageIdForNewMessage, testDateTime)
+    val xml = <IE818>test</IE818>
+    val encodeMessage = Base64.getEncoder.encodeToString(xml.toString().getBytes(StandardCharsets.UTF_8))
+    val expectedMessage = Message(xml.hashCode, encodeMessage, MessageTypes.IE818.value, messageIdForNewMessage, testDateTime)
 
     "save movement" when {
       "message contains Administration Reference Code (ARC)" in {
@@ -496,7 +497,7 @@ class MovementServiceSpec extends PlaySpec with EitherValues with BeforeAndAfter
     }
 
     "do not save duplicate messages to DB" in {
-      val cachedMessage = createMessage("<foo>test</foo>", MessageTypes.IE801.value, messageIdForNewMessage)
+      val cachedMessage = createMessage(<foo>test</foo>, MessageTypes.IE801.value, messageIdForNewMessage)
 
       val movementWithMessagesAlready = Movement(Some("boxId"), lrn, consignorId, None, None, testDateTime, Seq(cachedMessage, cachedMessage1, cachedMessage2))
 
@@ -510,7 +511,7 @@ class MovementServiceSpec extends PlaySpec with EitherValues with BeforeAndAfter
     }
 
     "save to DB when message has different content but the same message type" in {
-      val cachedMessage: Message = createMessage("<foo>different content</foo>", MessageTypes.IE801.value, messageIdForNewMessage)
+      val cachedMessage: Message = createMessage(<foo>different content</foo>, MessageTypes.IE801.value, messageIdForNewMessage)
       val movementWithMessagesAlready = Movement(Some("boxId"), lrn, consignorId, None, None, testDateTime, Seq(cachedMessage, cachedMessage1))
 
       setUpForUpdateMovement(newMessage, Seq(None), Some("123"), "<foo>test</foo>", cachedMovements, messageIdForNewMessage)
@@ -518,7 +519,7 @@ class MovementServiceSpec extends PlaySpec with EitherValues with BeforeAndAfter
 
       await(movementService.updateMovement(newMessage, consignorId))
 
-      val expectedNewMessage = createMessage("<foo>test</foo>", MessageTypes.IE818.value, messageIdForNewMessage)
+      val expectedNewMessage = createMessage(<foo>test</foo>, MessageTypes.IE818.value, messageIdForNewMessage)
       val expectedMovement = movementWithMessagesAlready.copy(messages = Seq(cachedMessage, cachedMessage1, expectedNewMessage))
       verify(mockMovementRepository).updateMovement(eqTo(expectedMovement))
     }
@@ -555,8 +556,8 @@ class MovementServiceSpec extends PlaySpec with EitherValues with BeforeAndAfter
       .thenReturn(Future.successful(updatedMovement))
   }
 
-  private def createMessage(xml: String, messageType: String, messageIdForNewMessage: String) = {
-    val encodeMessage = Base64.getEncoder.encodeToString(xml.getBytes(StandardCharsets.UTF_8))
-    Message(encodeMessage, messageType, messageIdForNewMessage, testDateTime)
+  private def createMessage(xml: NodeSeq, messageType: String, messageIdForNewMessage: String) = {
+    val encodeMessage = Base64.getEncoder.encodeToString(xml.toString().getBytes(StandardCharsets.UTF_8))
+    Message(xml.hashCode(), encodeMessage, messageType, messageIdForNewMessage, testDateTime)
   }
 }

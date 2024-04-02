@@ -20,11 +20,30 @@ import scala.xml.{NamespaceBinding, NodeSeq, TopScope}
 
 trait XmlScope {
 
-  def createScopeFromXml(xml: NodeSeq, label: String ): NamespaceBinding = {
-    xml match {
-      case scala.xml.Elem(_, root,_, s, _*) if root == label => s
-      case _ => TopScope
-    }
+  /*
+  Create a scope from the XML.
+   */
+  def createScopeFromXml(xml: NodeSeq, messageType: String): NamespaceBinding = {
+
+    val unfoldedScope = extractScope(xml, messageType)
+    val scope = scalaxb.toScope(unfoldedScope: _*)
+
+    if(scope.equals(TopScope)) generated.defaultScope
+    else scope
+  }
+
+  /*
+  Extract the scope from the XML message. This go through the XML and collect
+  any prefix (e.g urn if <urn:IE801>) and return an unfolded scope for all
+  the prefix collected
+   */
+  private def extractScope(xml: NodeSeq, messageType: String): Seq[(Option[String], String)] = {
+    (xml \\ messageType \\ "_").map { o =>
+        if (o.scope.equals(TopScope)) (None, "")
+        else (Some(o.prefix), o.namespace)
+      }
+      .distinctBy(identity)
+      .filterNot(_._1.isEmpty)
   }
 }
 
