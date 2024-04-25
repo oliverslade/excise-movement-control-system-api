@@ -54,7 +54,7 @@ case class IE704Message
     localReferenceNumber.contains(lrn)
   }
 
-  private def localReferenceNumber = {
+  def localReferenceNumber = {
     for {
       attribute <- obj.Body.GenericRefusalMessage.AttributesValue
       messageLrn <- attribute.LocalReferenceNumber

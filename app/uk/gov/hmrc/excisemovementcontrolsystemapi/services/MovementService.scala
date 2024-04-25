@@ -24,7 +24,7 @@ import play.api.mvc.Result
 import play.api.mvc.Results.{BadRequest, InternalServerError}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.filters.MovementFilter
 import uk.gov.hmrc.excisemovementcontrolsystemapi.models.ErrorResponse
-import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.IEMessage
+import uk.gov.hmrc.excisemovementcontrolsystemapi.models.messages.{IE704Message, IE801Message, IEMessage}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.repository.MovementRepository
 import uk.gov.hmrc.excisemovementcontrolsystemapi.repository.model.{Message, Movement}
 import uk.gov.hmrc.excisemovementcontrolsystemapi.utils.{DateTimeService, EmcsUtils}
@@ -138,9 +138,20 @@ class MovementService @Inject()(
     //TODO temporary logs for QA investigation
     logger.info(s"Attempting to find relevant movement for message. movementWithArc: ${movementWithArc.toString}, movementWithLrn: ${movementWithLrn.toString}, message: ${message.toString}")
 
-    (movementWithArc, movementWithLrn) match {
-      case (Some(mArc), _) => saveDistinctMessage(mArc, message, messageArc)
-      case (None, Some(mLrn)) => saveDistinctMessage(mLrn, message, messageArc)
+    (movementWithArc, movementWithLrn, message) match {
+      case (Some(mArc), _, _) => saveDistinctMessage(mArc, message, messageArc)
+      case (None, Some(mLrn), _) => saveDistinctMessage(mLrn, message, messageArc)
+      // If we cannot find a movement, this could have been submitted via TFE or legacy data so create a movement
+      case (_, _, msg: IE801Message) =>
+        val movement = Movement(None, msg.localReferenceNumber.get, msg.consignorId.get, msg.consigneeId, messageArc)
+        movementRepository.saveMovement(movement)
+        saveDistinctMessage(movement, message, messageArc)
+      case (_, _, msg: IE704Message) =>
+        // We can assume here that the ern is the consignor as this should be the first unknown message for the new movement
+        // TODO if we create a movement from the 704 with no consignee, we would potentially need to fill in more details from messages received, not just the ARC
+        val movement = Movement(None, msg.localReferenceNumber.get, ern, None, messageArc)
+        movementRepository.saveMovement(movement)
+        saveDistinctMessage(movement, message, messageArc)
       case _ => throw new RuntimeException(s"[MovementService] - Cannot find movement for ERN: $ern, ${message.toString}")
     }
   }
